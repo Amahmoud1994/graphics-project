@@ -4,9 +4,9 @@
 #include <sstream>
 #include "math.h"
 
-
+#include "variables.h"
 #include "attacker.h"
-#include "camera.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -17,30 +17,51 @@ void drawBitmapText(string, float, float, float);
 
 const int FPS = 33;
 
-Camera* camera = new Camera(0.0,10.0,10.0,0.0,0.0,0.0);
-Attacker* attacker = new Attacker();
-
 bool paused = false;
 bool gameOver = false;
 bool cinematic = false;
+
+Attacker* attacker = new Attacker(0);
+
+void motion(int x, int y)
+{
+	int diffx = x - lastx;
+	int diffy = y - lasty;
+	lastx = x;
+	lasty = y;
+	if (Buttons[0])
+	{
+		rotx += (float) 0.5f * diffy;
+		roty += (float) 0.5f * diffx;
+	}
+}
+
+void Mouse(int b, int s, int x, int y)
+{
+  std::cout << "hello" << std::endl;
+  lastx = x;
+	lasty = y;
+	switch (b)
+	{
+	case GLUT_LEFT_BUTTON:
+		Buttons[0] = ((GLUT_DOWN == s) ? 1 : 0);
+		break;
+	case GLUT_MIDDLE_BUTTON:
+		Buttons[1] = ((GLUT_DOWN == s) ? 1 : 0);
+		break;
+	case GLUT_RIGHT_BUTTON:
+		Buttons[2] = ((GLUT_DOWN == s) ? 1 : 0);
+		break;
+	default:
+		break;
+	}
+}
 
 void timer(int t)
 {
   if(!paused) {
 
-          if(cinematic) {
-                  camera->setXAngle(camera->getXAngle() + 0.5);
-                  camera->setYAngle(camera->getYAngle() + 0.5);
-                  camera->setZAngle(camera->getZAngle() + 0.5);
-          } else {
-                  camera->setXAngle(0.0);
-                  camera->setYAngle(0.0);
-                  camera->setZAngle(0.0);
-          }
-
-
-
-                  }
+              }
   glutPostRedisplay();
   glutTimerFunc(FPS, timer, 0);
 
@@ -59,10 +80,14 @@ void render(void) {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        if(!gameOver) {
-                drawBitmapText("Cost of Defender --> 150 ", 0.5, 11.5, 0);
-                drawBitmapText("Cost of Resource Gatherer --> 100 ", 0.5, 11.0, 0);
-        }
+        glPushMatrix();
+        glTranslatef(0, 0, 0);
+	      glRotatef(rotx, 1, 0, 0);
+	      glRotatef(roty, 0, 1, 0);
+	      glRotatef(rotz, 0, 0, 1);
+        drawAxes();
+        attacker->draw();
+        glPopMatrix();
 
         glutSwapBuffers();
 }
@@ -119,14 +144,6 @@ void drawAxes(void){
 }
 void keyboardHandler(unsigned char key, int x, int y){
 
-        if(key == Z_KEY && !cinematic) {
-                camera->setYCoordinate(camera->getYCoordinate()+0.5);
-                camera->setZCoordinate(camera->getZCoordinate()+0.5);
-        }
-        if(key == A_KEY && !cinematic) {
-                camera->setYCoordinate(camera->getYCoordinate()-0.5);
-                camera->setZCoordinate(camera->getZCoordinate()-0.5);
-        }
 }
 
 int main(int argc, char** argv) {
@@ -138,6 +155,8 @@ int main(int argc, char** argv) {
         glutCreateWindow("Graphics Project");
         glutDisplayFunc(render);
         glutTimerFunc(0, timer, 0);
+        glutMouseFunc(Mouse);
+	      glutMotionFunc(motion);
         glutKeyboardFunc(keyboardHandler);
 
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -151,7 +170,7 @@ int main(int argc, char** argv) {
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        gluLookAt(0.0f, 2.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        gluLookAt(15.0f, 15.0f, 15.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
         initLighting();
 

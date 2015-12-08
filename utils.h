@@ -30,6 +30,7 @@ using namespace std;
 
 const int GRID_MAX_CELL_LENGTH = 4;
 const int GRID_MAX_CELL_WIDTH = 8;
+const int carPosition = 1;
 
 const int ROW_SELECTION = 0;
 const int COLUMN_SELECTION = 1;

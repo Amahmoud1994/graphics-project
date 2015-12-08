@@ -5,11 +5,13 @@
 #include "math.h"
 
 #include "variables.h"
-#include "attacker.h"
+#include "car.h"
 #include "utils.h"
 
 using namespace std;
 
+void drawPathLines();
+void drawPath();
 void drawAxes();
 void timer(int);
 void keyboardHandler(unsigned char, int, int);
@@ -21,7 +23,7 @@ bool paused = false;
 bool gameOver = false;
 bool cinematic = false;
 
-Attacker* attacker = new Attacker(0);
+Car* car = new Car(0);
 
 void motion(int x, int y)
 {
@@ -38,7 +40,6 @@ void motion(int x, int y)
 
 void Mouse(int b, int s, int x, int y)
 {
-  std::cout << "hello" << std::endl;
   lastx = x;
 	lasty = y;
 	switch (b)
@@ -86,7 +87,12 @@ void render(void) {
 	      glRotatef(roty, 0, 1, 0);
 	      glRotatef(rotz, 0, 0, 1);
         drawAxes();
-        attacker->draw();
+				drawPathLines();
+				drawPath();
+        glPushMatrix();
+        glScaled(2,2,2);
+        car->draw();
+        glPopMatrix();
         glPopMatrix();
 
         glutSwapBuffers();
@@ -120,6 +126,38 @@ void drawBitmapText(string text, float x, float y, float z)
         glPopMatrix();
         glMatrixMode( GL_MODELVIEW );
         glPopMatrix();
+
+}
+
+void drawPath(void)
+{
+	glPushMatrix();
+
+	glBegin(GL_QUADS);
+	glColor3f(0,0,0); // x axis is red.
+	glVertex3f(0.0f,0.0f,0.0f);
+	glVertex3f(0.0f,0.0f,pathWidth);
+	glVertex3f(pathLength,0.0f,pathWidth);
+	glVertex3f(pathLength,0.0f,0.0f);
+	glEnd();
+
+	glPopMatrix ();
+
+}
+
+void drawPathLines(void)
+{
+	glPushMatrix();
+
+	glBegin(GL_QUADS);
+	glColor3f(1,1,1); // x axis is red.
+	glVertex3f(lineOrgPos*1.0,0.0f,lineOrgPos*1.0);
+	glVertex3f(lineOrgPos*1.0,0.0f,pathLinesWidth+5);
+	glVertex3f(5+pathLinesLength,0.0f,pathLinesWidth+5);
+	glVertex3f(5+pathLinesLength,0.0f,lineOrgPos*1.0);
+	glEnd();
+
+	glPopMatrix ();
 
 }
 
@@ -172,7 +210,7 @@ int main(int argc, char** argv) {
         glLoadIdentity();
         gluLookAt(15.0f, 15.0f, 15.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
-        initLighting();
+      //  initLighting();
 
         glutMainLoop();
 

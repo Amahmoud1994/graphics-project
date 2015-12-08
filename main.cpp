@@ -6,6 +6,7 @@
 
 #include "variables.h"
 #include "car.h"
+#include "brick.h"
 #include "utils.h"
 
 using namespace std;
@@ -24,6 +25,7 @@ bool gameOver = false;
 bool cinematic = false;
 
 Car* car = new Car(0);
+Brick *brick = new Brick(2);
 
 void motion(int x, int y)
 {
@@ -92,6 +94,7 @@ void render(void) {
         glPushMatrix();
         glScaled(2,2,2);
         car->draw();
+        brick->draw();
         glPopMatrix();
         glPopMatrix();
 

@@ -25,7 +25,8 @@ bool gameOver = false;
 bool cinematic = false;
 
 Car* car = new Car(0);
-Brick *brick = new Brick(2);
+Brick *brick1 = new Brick(-1, 1.2);
+Brick *brick2 = new Brick(-5, 0);
 
 void motion(int x, int y)
 {
@@ -82,21 +83,28 @@ void initLighting(){
 void render(void) {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glPushMatrix();
+				
+				// Camera
+				glMatrixMode(GL_MODELVIEW);
+				glLoadIdentity();
+				gluLookAt(10.0, 4.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         glTranslatef(0, 0, 0);
 	      glRotatef(rotx, 1, 0, 0);
 	      glRotatef(roty, 0, 1, 0);
 	      glRotatef(rotz, 0, 0, 1);
+				
+				// Drawings
         drawAxes();
+
+        // Terrain
 				drawPathLines();
 				drawPath();
-        glPushMatrix();
+
+        // Objects: car and obstacles
         glScaled(2,2,2);
-        car->draw();
-        brick->draw();
-        glPopMatrix();
-        glPopMatrix();
+				car->draw();
+        brick1->draw();
+				brick2->draw();
 
         glutSwapBuffers();
 }
@@ -208,10 +216,6 @@ int main(int argc, char** argv) {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluPerspective(45.0f, 800 / 600, 0.1f, 300.0f);
-
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(15.0f, 15.0f, 15.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
       //  initLighting();
 

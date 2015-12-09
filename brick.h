@@ -9,9 +9,9 @@ private:
 public:
         bool visible;
 
-        Brick(float zCoordinate){
-                this->xCoordinate = 1;
-                this->yCoordinate = 0.8;
+        Brick(float xCoordinate, float zCoordinate){
+                this->xCoordinate = xCoordinate;
+                this->yCoordinate = 0.3;
                 this->zCoordinate = zCoordinate;
                 this->angle       = 0;
                 this->visible     = true;

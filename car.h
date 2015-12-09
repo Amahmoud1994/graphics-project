@@ -15,7 +15,7 @@ public:
         bool visible;
         Car(float zCoordinate){
                 this->xCoordinate=carPosition;
-                this->yCoordinate=0.8;
+                this->yCoordinate=0.3;
                 this->zCoordinate=zCoordinate;
                 this->health = 3;
                 this->angle=0;

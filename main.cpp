@@ -14,6 +14,7 @@ using namespace std;
 void drawPathLines();
 void drawPath();
 void drawAxes();
+void drawCone();
 void timer(int);
 void keyboardHandler(unsigned char, int, int);
 void drawBitmapText(string, float, float, float);
@@ -93,7 +94,7 @@ void render(void) {
 	      glRotatef(roty, 0, 1, 0);
 	      glRotatef(rotz, 0, 0, 1);
 
-				// Drawings
+				// Drawings Axes
         drawAxes();
 
         // Terrain
@@ -105,6 +106,9 @@ void render(void) {
 				car->draw();
         brick1->draw();
 				brick2->draw();
+				//Draw the cone then add the texture
+				// that is red with yellow strips on it
+				drawCone();
 
         glutSwapBuffers();
 }
@@ -138,6 +142,16 @@ void drawBitmapText(string text, float x, float y, float z)
         glMatrixMode( GL_MODELVIEW );
         glPopMatrix();
 
+}
+
+void drawCone(void)
+{
+	glPushMatrix();
+	glColor3f(0.4,0,1);
+	glTranslated(-2.0,0,1.0);	// cone at (1,0,1)
+	glRotatef(-90,1,0,0);
+	glutSolidCone(0.2, 0.5, 10, 8);
+	glPopMatrix();
 }
 
 void drawPath(void)

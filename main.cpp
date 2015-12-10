@@ -83,16 +83,16 @@ void initLighting(){
 void render(void) {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				
+
 				// Camera
 				glMatrixMode(GL_MODELVIEW);
 				glLoadIdentity();
-				gluLookAt(10.0, 4.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+				gluLookAt(20.0, 4.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         glTranslatef(0, 0, 0);
 	      glRotatef(rotx, 1, 0, 0);
 	      glRotatef(roty, 0, 1, 0);
 	      glRotatef(rotz, 0, 0, 1);
-				
+
 				// Drawings
         drawAxes();
 
@@ -145,7 +145,7 @@ void drawPath(void)
 	glPushMatrix();
 
 	glBegin(GL_QUADS);
-	glColor3f(0,0,0); // x axis is red.
+	glColor3f(1,0,0); // x axis is red.
 	glVertex3f(0.0f,0.0f,0.0f);
 	glVertex3f(0.0f,0.0f,pathWidth);
 	glVertex3f(pathLength,0.0f,pathWidth);

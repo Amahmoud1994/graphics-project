@@ -8,13 +8,13 @@
 #include "car.h"
 #include "brick.h"
 #include "utils.h"
+#include "cone.h"
 
 using namespace std;
 
 void drawPathLines();
 void drawPath();
 void drawAxes();
-void drawCone();
 void timer(int);
 void keyboardHandler(unsigned char, int, int);
 void drawBitmapText(string, float, float, float);
@@ -28,6 +28,7 @@ bool cinematic = false;
 Car* car = new Car(0);
 Brick *brick1 = new Brick(-1, 1.2);
 Brick *brick2 = new Brick(-5, 0);
+Cone *cone1 = new Cone(-2,1);
 
 void motion(int x, int y)
 {
@@ -108,7 +109,7 @@ void render(void) {
 				brick2->draw();
 				//Draw the cone then add the texture
 				// that is red with yellow strips on it
-				drawCone();
+				cone1->draw();
 
         glutSwapBuffers();
 }
@@ -144,15 +145,6 @@ void drawBitmapText(string text, float x, float y, float z)
 
 }
 
-void drawCone(void)
-{
-	glPushMatrix();
-	glColor3f(0.4,0,1);
-	glTranslated(-2.0,0,1.0);	// cone at (1,0,1)
-	glRotatef(-90,1,0,0);
-	glutSolidCone(0.2, 0.5, 10, 8);
-	glPopMatrix();
-}
 
 void drawPath(void)
 {

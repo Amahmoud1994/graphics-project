@@ -152,10 +152,37 @@ void drawPath(void)
 
 	glBegin(GL_QUADS);
 	glColor3f(1,0,0); // x axis is red.
+
 	glVertex3f(0.0f,0.0f,0.0f);
 	glVertex3f(0.0f,0.0f,pathWidth);
 	glVertex3f(pathLength,0.0f,pathWidth);
 	glVertex3f(pathLength,0.0f,0.0f);
+
+	glVertex3f(0.0f,0.0f,0.0f);
+	glVertex3f(pathLength,0.0f,0.0f);
+	glVertex3f(pathLength,pathThickness,0.0f);
+	glVertex3f(0.0f,pathThickness,0.0f);
+
+	glVertex3f(0.0f,0.0f,0.0f);
+	glVertex3f(0.0f,0.0f,pathWidth);
+	glVertex3f(0.0f,pathThickness,pathWidth);
+	glVertex3f(0.0f,pathThickness,0.0f);
+
+	glVertex3f(pathLength,0.0f,0.0f);
+	glVertex3f(pathLength,0.0f,pathWidth);
+	glVertex3f(pathLength,pathThickness,pathWidth);
+	glVertex3f(pathLength,pathThickness,0.0f);
+
+	glVertex3f(0.0f,0.0f,pathWidth);
+	glVertex3f(pathLength,0.0f,pathWidth);
+	glVertex3f(pathLength,pathThickness,pathWidth);
+	glVertex3f(0.0f,pathThickness,pathWidth);
+
+	glVertex3f(0.0f,pathThickness,0.0f);
+	glVertex3f(0.0f,pathThickness,pathWidth);
+	glVertex3f(pathLength,pathThickness,pathWidth);
+	glVertex3f(pathLength,pathThickness,0.0f);
+
 	glEnd();
 
 	glPopMatrix ();

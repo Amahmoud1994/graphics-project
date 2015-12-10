@@ -15,6 +15,7 @@ float dx = 0.7;
 float dy = 0.7;
 float pathWidth = 30.0f;
 float pathLength = 50.0f;
+float pathThickness = -1.0f;
 float pathLinesWidth = 2.0f;
 float pathLinesLength = 5.0f;
 int lineOrgPos = 5;

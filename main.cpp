@@ -18,6 +18,8 @@ vector <Cone> cones;
 
 int TCNT = 0; // Time counter
 
+void Switch_Key(int, int, int);
+
 void render(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -129,6 +131,15 @@ void Mouse(int b, int s, int x, int y) {
 	}
 }
 
+void Switch_Key(int key, int x, int y)
+{
+  switch (key) {
+    case GLUT_KEY_UP    :  car->xCoordinate-=0.1;break;
+    case GLUT_KEY_DOWN  :  car->xCoordinate+=0.1;break;
+    case GLUT_KEY_RIGHT :  car->zCoordinate-=0.1;break;
+    default             :  car->zCoordinate+=0.1;break;
+  }
+}
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
 
@@ -142,7 +153,7 @@ int main(int argc, char** argv) {
   glutMotionFunc(motion);
   glutKeyboardFunc(keyboardHandler);
   glutMouseFunc(Mouse);
-
+  glutSpecialFunc(Switch_Key);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
   glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 

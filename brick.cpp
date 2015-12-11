@@ -13,4 +13,5 @@ void Brick::draw(){
 }
 
 void Brick::update(){
+  xCoordinate += CAMERA_SPEED;
 }

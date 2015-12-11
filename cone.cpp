@@ -15,4 +15,5 @@ void Cone::draw(){
 }
 
 void Cone::update(){
+  xCoordinate += CAMERA_SPEED;
 }

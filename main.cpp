@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <sstream>
 #include "math.h"
+#include <vector>
 
 #include "utils.h"
 #include "terrain.h"
@@ -9,10 +10,13 @@
 #include "cone.h"
 
 Terrain *terrain = new Terrain();
+
 Car* car = new Car();
-Brick *brick1 = new Brick(-1, 1.2);
-Brick *brick2 = new Brick(-5, 0);
-Cone *cone1 = new Cone(-2,1);
+
+vector <Brick> bricks;
+vector <Cone> cones;
+
+int TCNT = 0; // Time counter
 
 void render(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -26,31 +30,68 @@ void render(void) {
   glRotatef(roty, 0, 1, 0);
   glRotatef(rotz, 0, 0, 1);
 
-  // Drawings Axes
+  // Axes
   drawAxes();
 
   // Terrain
   terrain->draw();
 
-  // Objects: car and obstacles
+  // Car
   glScaled(2,2,2);
   car->draw();
-  brick1->draw();
-  brick2->draw();
-  cone1->draw();
+
+  // Bricks
+  if (!bricks.empty()) {
+    for(size_t i = 0; i < bricks.size(); i++) {
+      bricks[i].draw();
+    }
+  }
+
+  // Cones
+  if (!cones.empty()) {
+    for(size_t i = 0; i < cones.size(); i++) {
+      cones[i].draw();
+    }
+  }
 
   glutSwapBuffers();
 }
 
 void update() {
+  terrain->update();
+
+  if (!bricks.empty()) {
+    for(size_t i = 0; i < bricks.size(); i++) {
+      bricks[i].update();
+    }
+  }
+
+  if (!cones.empty()) {
+    for(size_t i = 0; i < cones.size(); i++) {
+      cones[i].update();
+    }
+  }
 }
 
-void timer(int t)
-{
+void timer(int t) {
+  if(TCNT == 80) {
+    int brickX = generateRandom(-1, -9);
+    int brickZ = generateRandom(0, 3);
+    Brick *brick = new Brick(brickX, brickZ);
+    bricks.push_back(*brick);
+
+    int coneX = generateRandom(-1, -9);
+    int coneZ = generateRandom(0, 3);
+    Cone *cone = new Cone(coneX, coneZ);
+    cones.push_back(*cone);
+
+    TCNT = 0;
+  }
+
+  TCNT++;
 
   glutPostRedisplay();
   glutTimerFunc(FPS, timer, 0);
-
 }
 
 void motion(int x, int y)

@@ -2,6 +2,8 @@
 #define  Terrain_H
 
 #include "drawable.h"
+#include "utils.h"
+#include <GL/glut.h>
 
 class Terrain : public Drawable {
 private:
@@ -17,7 +19,11 @@ public:
   bool visible;
 
   Terrain() {
-    pathWidth = 30.0f;
+    xCoordinate = 0;
+    yCoordinate = 0;
+    zCoordinate = 0;
+
+    pathWidth = 50.0f;
     pathLength = 50.0f;
     pathThickness = -1.0f;
     pathLinesWidth = 2.0f;

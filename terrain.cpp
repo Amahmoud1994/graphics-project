@@ -1,5 +1,4 @@
 #include "terrain.h"
-#include <GL/glut.h>
 
 void Terrain::draw(){
   if(!this->visible) {
@@ -9,9 +8,10 @@ void Terrain::draw(){
 	drawLanes();
 
 	glPushMatrix();
+  glTranslatef(xCoordinate, yCoordinate, zCoordinate);
 
 	glBegin(GL_QUADS);
-	glColor3f(1,0,0); // red.
+	glColor3f(1,0,0);
 
 	glVertex3f(0.0f,0.0f,0.0f);
 	glVertex3f(0.0f,0.0f,pathWidth);
@@ -63,5 +63,5 @@ void Terrain::drawLanes() {
 }
 
 void Terrain::update(){
+  xCoordinate -= CAMERA_SPEED;
 }
-

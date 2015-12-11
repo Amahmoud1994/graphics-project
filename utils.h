@@ -1,10 +1,8 @@
-#ifndef APP_CONSTANTS_H
-#define  APP_CONSTANTS_H
+#ifndef Utils_H
+#define Utils_H
 
-#include <iostream>
-#include <string>
-#include <stdio.h>
 #include <GL/glut.h>
+#include <string>
 
 using namespace std;
 
@@ -16,6 +14,7 @@ using namespace std;
 #define R_KEY 114
 #define C_KEY 99
 #define V_KEY 118
+#define ESC_KEY 27
 
 #define NUM_1 49
 #define NUM_2 50
@@ -27,42 +26,23 @@ using namespace std;
 #define NUM_8 56
 #define NUM_9 57
 
+#define WINDOW_WIDTH  800
+#define WINDOW_HEIGHT 600
 
-const int GRID_MAX_CELL_LENGTH = 4;
-const int GRID_MAX_CELL_WIDTH = 8;
-const int carPosition = 1;
+#define ABOVE_TERRAIN_LEVEL 0.3f
 
-const int ROW_SELECTION = 0;
-const int COLUMN_SELECTION = 1;
-const int TYPE_SELECTION = 2;
+const int FPS = 30;
 
-inline int keyToNumeric(unsigned char key) {
-        switch (key) {
-        case NUM_1:
-                return 1;
-        case NUM_2:
-                return 2;
-        case NUM_3:
-                return 3;
-        case NUM_4:
-                return 4;
-        case NUM_5:
-                return 5;
-        case NUM_6:
-                return 6;
-        case NUM_7:
-                return 7;
-        case NUM_8:
-                return 8;
-        case NUM_9:
-                return 9;
-        default:
-                return -1;
-        }
-}
+extern unsigned char Buttons[3];
+extern int lastx;
+extern int lasty;
+extern float rotx;
+extern float roty;
+extern float rotz;
 
-inline int generateRandom(int min,int max){
-        return int(min + (rand() % (int)(max - min + 1)));
-}
-
+int keyToNumeric(unsigned char key);
+int generateRandom(int min,int max);
+void drawAxes();
+void drawBitmapText(string text, float x, float y, float z);
+void initLighting();
 #endif

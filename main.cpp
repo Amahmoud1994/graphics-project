@@ -134,10 +134,10 @@ void Mouse(int b, int s, int x, int y) {
 void Switch_Key(int key, int x, int y)
 {
   switch (key) {
-    case GLUT_KEY_UP    :  car->xCoordinate-=0.1;break;
-    case GLUT_KEY_DOWN  :  car->xCoordinate+=0.1;break;
-    case GLUT_KEY_RIGHT :  car->zCoordinate-=0.1;break;
-    default             :  car->zCoordinate+=0.1;break;
+    case GLUT_KEY_UP    :  if(car->xCoordinate > 0)car->xCoordinate-=0.1;break;
+    case GLUT_KEY_DOWN  :  if(car->xCoordinate < terrain->pathLength)car->xCoordinate+=0.1;break;
+    case GLUT_KEY_RIGHT :  if(car->zCoordinate > 0)car->zCoordinate-=0.1;break;
+    default             :  if(car->zCoordinate < terrain->pathWidth)car->zCoordinate+=0.1;break;
   }
 }
 int main(int argc, char** argv) {

@@ -19,6 +19,7 @@ vector <Cone> cones;
 int TCNT = 0; // Time counter
 
 void Switch_Key(int, int, int);
+void drawTextureCube(void);
 
 void render(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -32,6 +33,9 @@ void render(void) {
   glRotatef(rotx, 1, 0, 0);
   glRotatef(roty, 0, 1, 0);
   glRotatef(rotz, 0, 0, 1);
+
+  //Draw the Texturing Cube
+  drawTextureCube();
 
   // Axes
   drawAxes();
@@ -111,6 +115,15 @@ void motion(int x, int y)
 		rotx += (float) 0.5f * diffy;
 		roty += (float) 0.5f * diffx;
 	}
+}
+
+void drawTextureCube()
+{
+  glPushMatrix(); // The cubic body
+  glColor3f(0,0,0);
+  glTranslatef(25,25,25);
+  glutWireCube(50);
+  glPopMatrix();
 }
 
 void keyboardHandler(unsigned char key, int x, int y) {

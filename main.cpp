@@ -27,7 +27,8 @@ void render(void) {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   gluLookAt(20.0, 4.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-  glTranslatef(0, 0, 0);
+  if(!gameOver)
+  {
   glRotatef(rotx, 1, 0, 0);
   glRotatef(roty, 0, 1, 0);
   glRotatef(rotz, 0, 0, 1);
@@ -55,7 +56,10 @@ void render(void) {
       cones[i].draw();
     }
   }
-
+}else
+{
+  drawBitmapText("You Lost Try Again Later", 7, 10,2);
+}
   glutSwapBuffers();
 }
 
@@ -140,6 +144,15 @@ void Switch_Key(int key, int x, int y)
     default             :  if(car->zCoordinate < terrain->pathWidth)car->zCoordinate+=0.1;break;
   }
 }
+
+void decScore()
+{
+  gameScore--;
+  if(gameScore ==0)
+    gameOver=true;
+
+}
+
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
 

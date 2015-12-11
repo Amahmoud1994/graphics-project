@@ -6,6 +6,9 @@ float roty = 0;
 float rotz = 0;
 int lastx = 0;
 int lasty = 0;
+int gameScore=4;
+
+bool gameOver =false;
 
 int keyToNumeric(unsigned char key) {
   switch (key) {
@@ -73,7 +76,7 @@ void drawBitmapText(string text, float x, float y, float z) {
   glRasterPos2i(x*50, y*50);
 
   for (unsigned int i = 0; i < text.size(); i++) {
-    glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, text[i]);
+    glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
   }
 
   glEnable( GL_DEPTH_TEST );

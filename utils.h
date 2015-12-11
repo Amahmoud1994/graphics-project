@@ -37,9 +37,12 @@ const int FPS = 30;
 extern unsigned char Buttons[3];
 extern int lastx;
 extern int lasty;
+extern int gameScore;
 extern float rotx;
 extern float roty;
 extern float rotz;
+extern bool gameOver;
+
 
 int keyToNumeric(unsigned char key);
 int generateRandom(int min,int max);

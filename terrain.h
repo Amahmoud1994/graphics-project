@@ -19,9 +19,9 @@ public:
   bool visible;
 
   Terrain() {
-    xCoordinate = 0;
+    xCoordinate = -25;
     yCoordinate = 0;
-    zCoordinate = 0;
+    zCoordinate = -25;
 
     pathWidth = 50.0f;
     pathLength = 50.0f;

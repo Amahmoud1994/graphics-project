@@ -121,7 +121,6 @@ void drawTextureCube()
 {
   glPushMatrix(); // The cubic body
   glColor3f(0,0,0);
-  glTranslatef(25,25,25);
   glutWireCube(50);
   glPopMatrix();
 }

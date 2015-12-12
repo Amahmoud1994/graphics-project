@@ -9,9 +9,10 @@ void Terrain::draw(){
 
 	glPushMatrix();
   glTranslatef(xCoordinate, yCoordinate, zCoordinate);
+  glPushMatrix();
 
 	glBegin(GL_QUADS);
-	glColor3f(1,0,0);
+	glColor3f(0.1,0.1,0.1);
 
 	glVertex3f(0.0f,0.0f,0.0f);
 	glVertex3f(0.0f,0.0f,pathWidth);
@@ -44,6 +45,7 @@ void Terrain::draw(){
 	glVertex3f(pathLength,pathThickness,0.0f);
 
 	glEnd();
+  glPopMatrix ();
 
 	glPopMatrix ();
 }
@@ -63,5 +65,4 @@ void Terrain::drawLanes() {
 }
 
 void Terrain::update(){
-  xCoordinate -= CAMERA_SPEED;
 }

@@ -46,6 +46,7 @@ extern float rotz;
 extern float carSpeed;
 extern bool gameOver;
 extern GLuint asphaltTexture;
+extern GLuint grassTexture;
 
 
 int keyToNumeric(unsigned char key);
@@ -53,5 +54,5 @@ int generateRandom(int min,int max);
 void drawAxes();
 void drawBitmapText(string text, float x, float y, float z);
 void initLighting();
-void loadTexture(char* imagePath);
+void loadTextures();
 #endif

@@ -19,6 +19,7 @@ float carSpeed = 0.5f;
 bool gameOver =false;
 
 GLuint asphaltTexture;
+GLuint grassTexture;
 
 int generateRandom(int min,int max){
         return int(min + (rand() % (int)(max - min + 1)));
@@ -84,16 +85,21 @@ void initLighting(){
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 }
 
-void loadTexture(char* imagePath) {
+void loadTextures() {
+
         asphaltTexture = SOIL_load_OGL_texture (
-                imagePath,
+                "textures/asphalt.jpg",
                 SOIL_LOAD_AUTO,
                 SOIL_CREATE_NEW_ID,
                 SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
                 );
 
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);         // Linear Filtering
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);         // Linear Filtering
+        grassTexture = SOIL_load_OGL_texture (
+                "textures/grass.jpg",
+                SOIL_LOAD_AUTO,
+                SOIL_CREATE_NEW_ID,
+                SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+                );
 
 
         if( 0 == asphaltTexture )

@@ -120,6 +120,8 @@ int main(int argc, char** argv) {
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
+        loadTextures();
+        
         glEnable(GL_DEPTH_TEST);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
@@ -134,7 +136,6 @@ int main(int argc, char** argv) {
         initRoad();
         initLighting();
 
-        loadTexture("textures/asphalt.jpg");
 
         glutMainLoop();
 

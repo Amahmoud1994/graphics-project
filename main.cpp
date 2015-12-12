@@ -10,6 +10,7 @@
 #include "utils.h"
 #include "car.h"
 #include "road.h"
+#include "brick.h"
 
 using namespace std;
 void timer(int);
@@ -18,6 +19,7 @@ void mouseRotation();
 void initRoad();
 void drawRoad();
 Car* car = new Car();
+Brick* brick = new Brick(0,-19,1);
 
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
@@ -69,6 +71,8 @@ void render(void) {
         glPushMatrix();
         mouseRotation();
         drawRoad();
+        brick->update();
+        brick->draw();
         car->draw();
         drawAxes();
         glPopMatrix();

@@ -16,6 +16,7 @@ public:
     this->xCoordinate = 0;
     this->yCoordinate = ABOVE_TERRAIN_LEVEL;
     this->zCoordinate = 0;
+    this->width = 1;
     this->health      = 3;
     this->angle       = 0;
     this->visible     = true;

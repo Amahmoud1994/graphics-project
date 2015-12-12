@@ -8,10 +8,11 @@
 class Brick : public Drawable {
 public:
 
-  Brick(float xCoordinate, float zCoordinate) {
+  Brick(float xCoordinate, float zCoordinate,float width) {
     this->xCoordinate = xCoordinate;
     this->yCoordinate = ABOVE_TERRAIN_LEVEL;
     this->zCoordinate = zCoordinate;
+    this->width = width;
     this->visible     = true;
   }
 

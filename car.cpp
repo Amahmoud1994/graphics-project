@@ -5,6 +5,7 @@ void Car::draw(){
     return;
   }
   glPushMatrix();
+  glTranslatef(0.5f,0,1.5f);
   glRotatef(-90,0,1,0);
   // Start wheels
   glPushMatrix();

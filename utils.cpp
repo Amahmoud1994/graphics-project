@@ -1,4 +1,10 @@
 #include "utils.h"
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <SOIL/SOIL.h>
+
+using namespace std;
 
 unsigned char Buttons[3] = { 0 };
 float rotx = -25;
@@ -13,55 +19,55 @@ float carSpeed = 0.05f;
 bool gameOver =false;
 
 int generateRandom(int min,int max){
-  return int(min + (rand() % (int)(max - min + 1)));
+        return int(min + (rand() % (int)(max - min + 1)));
 }
 
 void drawAxes() {
-  glPushMatrix();
+        glPushMatrix();
 
-  glLineWidth(2.0);
+        glLineWidth(2.0);
 
-  glBegin(GL_LINES);
-  glColor3f(1,0,0); // x axis is red.
-  glVertex3f(0.0f,0.0f,0.0f);
-  glVertex3f(500.0f,0.0f,0.0f);
-  glColor3f(0,1,0); // y axis is green.
-  glVertex3f(0.0f,0.0f,0.0f);
-  glVertex3f(0.0f,500.0f,0.0f);
-  glColor3f(0,0,1); // z axis is blue.
-  glVertex3f(0.0f,0.0f,0.0f);
-  glVertex3f(0.0f,0.0f,500.0f);
-  glEnd();
+        glBegin(GL_LINES);
+        glColor3f(1,0,0); // x axis is red.
+        glVertex3f(0.0f,0.0f,0.0f);
+        glVertex3f(500.0f,0.0f,0.0f);
+        glColor3f(0,1,0); // y axis is green.
+        glVertex3f(0.0f,0.0f,0.0f);
+        glVertex3f(0.0f,500.0f,0.0f);
+        glColor3f(0,0,1); // z axis is blue.
+        glVertex3f(0.0f,0.0f,0.0f);
+        glVertex3f(0.0f,0.0f,500.0f);
+        glEnd();
 
-  glPopMatrix ();
+        glPopMatrix ();
 }
 
 void drawBitmapText(string text, float x, float y, float z) {
-  glDisable(GL_TEXTURE_2D);
-  glMatrixMode( GL_PROJECTION );
-  glPushMatrix();
-  glLoadIdentity();
-  gluOrtho2D(0.0, 800, 0.0, 600);
-  glMatrixMode( GL_MODELVIEW );
-  glPushMatrix();
-  glLoadIdentity();
+        glDisable(GL_TEXTURE_2D);
+        glMatrixMode( GL_PROJECTION );
+        glPushMatrix();
+        glLoadIdentity();
+        gluOrtho2D(0.0, 800, 0.0, 600);
+        glMatrixMode( GL_MODELVIEW );
+        glPushMatrix();
+        glLoadIdentity();
 
-  glDisable( GL_DEPTH_TEST );
-  glDisable(GL_LIGHTING);
+        glDisable( GL_DEPTH_TEST );
+        glDisable(GL_LIGHTING);
 
-  glColor3f(1.0, 0.0, 0.0);
-  glRasterPos2i(x*50, y*50);
+        glColor3f(1.0, 0.0, 0.0);
+        glRasterPos2i(x*50, y*50);
 
-  for (unsigned int i = 0; i < text.size(); i++) {
-    glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
-  }
+        for (unsigned int i = 0; i < text.size(); i++) {
+                glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
+        }
 
-  glEnable( GL_DEPTH_TEST );
-  glEnable(GL_LIGHTING);
-  glMatrixMode( GL_PROJECTION );
-  glPopMatrix();
-  glMatrixMode( GL_MODELVIEW );
-  glPopMatrix();
+        glEnable( GL_DEPTH_TEST );
+        glEnable(GL_LIGHTING);
+        glMatrixMode( GL_PROJECTION );
+        glPopMatrix();
+        glMatrixMode( GL_MODELVIEW );
+        glPopMatrix();
 }
 
 void initLighting(){
@@ -74,4 +80,25 @@ void initLighting(){
 
         GLfloat lightpos[] = {0.0f, 5.0f, 0.0f, 1.0f};
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+}
+
+GLuint loadTexture(char* imagePath) {
+        GLuint texture = SOIL_load_OGL_texture (
+                imagePath,
+                SOIL_LOAD_AUTO,
+                SOIL_CREATE_NEW_ID,
+                SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+                );
+
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);         // Linear Filtering
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);         // Linear Filtering
+
+
+        if( 0 == texture )
+        {
+                cout << "SOIL loading error: " << SOIL_last_result() <<endl;
+        }
+
+        return texture;
+
 }

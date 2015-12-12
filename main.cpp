@@ -82,6 +82,9 @@ void update() {
 }
 
 void timer(int t) {
+
+  update();
+
   if(TCNT == 80) {
     int brickX = generateRandom(-1, -9);
     int brickZ = generateRandom(0, 3);
@@ -171,7 +174,6 @@ int main(int argc, char** argv) {
 
   glutCreateWindow("Race the Moon");
   glutDisplayFunc(render);
-  glutIdleFunc(update);
   glutTimerFunc(0, timer, 0);
   glutMotionFunc(motion);
   glutKeyboardFunc(keyboardHandler);

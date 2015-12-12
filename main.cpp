@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "math.h"
 
+#include "utils.h"
 #include "car.h"
 #include "road.h"
 
@@ -51,34 +52,34 @@ void mouseRotation(){
 
 void motion(int x, int y)
 {
-	int diffx = x - lastx;
-	int diffy = y - lasty;
-	lastx = x;
-	lasty = y;
-	if (Buttons[0])
-	{
-		rotx += (float) 0.2f * diffy;
-		roty += (float) 0.2f * diffx;
-	}
+        int diffx = x - lastx;
+        int diffy = y - lasty;
+        lastx = x;
+        lasty = y;
+        if (Buttons[0])
+        {
+                rotx += (float) 0.2f * diffy;
+                roty += (float) 0.2f * diffx;
+        }
 }
 
 void mouse(int b, int s, int x, int y) {
-  lastx = x;
-	lasty = y;
+        lastx = x;
+        lasty = y;
 
-	switch (b) {
-	case GLUT_LEFT_BUTTON:
-		Buttons[0] = ((GLUT_DOWN == s) ? 1 : 0);
-		break;
-	case GLUT_MIDDLE_BUTTON:
-		Buttons[1] = ((GLUT_DOWN == s) ? 1 : 0);
-		break;
-	case GLUT_RIGHT_BUTTON:
-		Buttons[2] = ((GLUT_DOWN == s) ? 1 : 0);
-		break;
-	default:
-		break;
-	}
+        switch (b) {
+        case GLUT_LEFT_BUTTON:
+                Buttons[0] = ((GLUT_DOWN == s) ? 1 : 0);
+                break;
+        case GLUT_MIDDLE_BUTTON:
+                Buttons[1] = ((GLUT_DOWN == s) ? 1 : 0);
+                break;
+        case GLUT_RIGHT_BUTTON:
+                Buttons[2] = ((GLUT_DOWN == s) ? 1 : 0);
+                break;
+        default:
+                break;
+        }
 }
 
 void render(void) {
@@ -98,9 +99,9 @@ void timer(int t) {
         glutTimerFunc(FPS, timer, 0);
 }
 
-void keyboardHandler(unsigned char key, int x, int y){
-  if(key=='s')
-    carSpeed+=0.001f;
+void keyboardHandler(unsigned char key, int x, int y) {
+        if(key=='s')
+                carSpeed+=0.001f;
 }
 
 int main(int argc, char** argv) {
@@ -120,6 +121,8 @@ int main(int argc, char** argv) {
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_2D);
+        glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();

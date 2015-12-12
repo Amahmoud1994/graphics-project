@@ -52,4 +52,5 @@ int generateRandom(int min,int max);
 void drawAxes();
 void drawBitmapText(string text, float x, float y, float z);
 void initLighting();
+GLuint loadTexture(char* imagePath);
 #endif

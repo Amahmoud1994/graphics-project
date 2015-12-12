@@ -1,14 +1,14 @@
 #include "utils.h"
 
 unsigned char Buttons[3] = { 0 };
-float rotx = 0;
+float rotx = -25;
 float roty = 0;
 float rotz = 0;
 int lastx = 0;
 int lasty = 0;
 int gameScore=4;
 
-float carSpeed = 0.005f; 
+float carSpeed = 0.05f;
 
 bool gameOver =false;
 

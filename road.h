@@ -6,6 +6,8 @@
 #include <GL/glut.h>
 
 class Road : public Drawable {
+private:
+  void drawWhiteLine(float);
 public:
 
   Road(float zCoordinate) {

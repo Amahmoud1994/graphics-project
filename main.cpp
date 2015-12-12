@@ -15,7 +15,8 @@ void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
 
 Car* car = new Car();
-Road* road = new Road(-5.0f);
+Road* road1 = new Road(-5.0f);
+Road* road2 = new Road(10.0f);
 
 void mouseRotation(){
         glRotatef(rotx, 1, 0, 0);
@@ -59,8 +60,10 @@ void render(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
         mouseRotation();
-        road->update();
-        road->draw();
+        road1->update();
+        road1->draw();
+        road2->update();
+        road2->draw();
         car->draw();
         drawAxes();
         glPopMatrix();
@@ -74,7 +77,8 @@ void timer(int t) {
 }
 
 void keyboardHandler(unsigned char key, int x, int y){
-
+  if(key=='s')
+    carSpeed+=0.001f;
 }
 
 int main(int argc, char** argv) {

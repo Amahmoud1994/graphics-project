@@ -11,18 +11,9 @@
 using namespace std;
 void timer(int);
 void keyboardHandler(unsigned char, int, int);
-void drawAxes();
 void mouseRotation();
 
-const int FPS = 33;
-unsigned char Buttons[3] = { 0 };
-int lastx = 0;
-int lasty = 0;
-float rotx = 0;
-float roty = 0;
-float rotz = 0;
-
-Car* car = new Car(0);
+Car* car = new Car();
 
 void mouseRotation(){
         glRotatef(rotx, 1, 0, 0);
@@ -80,35 +71,6 @@ void timer(int t) {
 
 void keyboardHandler(unsigned char key, int x, int y){
 
-}
-
-void drawAxes(void){
-        glPushMatrix();
-
-        glLineWidth(2.0);
-
-        glBegin(GL_LINES);
-        glColor3f(1,0,0); // x axis is red.
-        glVertex3f(0.0f,0.0f,0.0f);
-        glVertex3f(500.0f,0.0f,0.0f);
-        glColor3f(0,1,0); // y axis is green.
-        glVertex3f(0.0f,0.0f,0.0f);
-        glVertex3f(0.0f,500.0f,0.0f);
-        glColor3f(0,0,1); // z axis is blue.
-        glVertex3f(0.0f,0.0f,0.0f);
-        glVertex3f(0.0f,0.0f,500.0f);
-        glEnd();
-
-        glPopMatrix ();
-}
-
-void initLighting(){
-        glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0);
-        glEnable(GL_NORMALIZE);
-        glEnable(GL_COLOR_MATERIAL);
-        glEnable(GL_SMOOTH);
-        glShadeModel(GL_SMOOTH);
 }
 
 int main(int argc, char** argv) {

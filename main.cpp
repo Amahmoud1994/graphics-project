@@ -17,13 +17,15 @@ void timer(int);
 void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
 void initRoad();
+void initBricks();
 void drawRoad();
+void drawBricks();
 
 Car* car = new Car();
-Brick* brick = new Brick(0,-19,1);
 
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
+Brick* bricks[NUM_OF_BRICKS];
 
 void initRoad(){
   float pos = (NUM_OF_ROADS/2.0)*15;
@@ -33,9 +35,19 @@ void initRoad(){
   }
 }
 
+void initBricks(){
+  float pos = -(NUM_OF_ROADS/2.0)*NUM_OF_BRICKS*5;
+  float xCoordinates[3] = {1,0,-1};
+  for(int i=0;i<NUM_OF_BRICKS;i++){
+    bricks[i] = new Brick(i,xCoordinates[i%3],pos,1);
+    pos+=30;
+  }
+}
+
 void drawRoad(){
   for(int i=0;i<NUM_OF_ROADS;i++){
-    roads[i]->update();
+    if(!pause)
+      roads[i]->update();
     roads[i]->draw();
   }
   if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15){
@@ -46,6 +58,15 @@ void drawRoad(){
       farestRoad = NUM_OF_ROADS-1;
   }
 }
+
+void drawBricks(){
+  for(int i=0;i<NUM_OF_BRICKS;i++){
+    if(!pause)
+      bricks[i]->update();
+    bricks[i]->draw();
+  }
+}
+
 void mouseRotation(){
         glRotatef(rotx, 1, 0, 0);
         glRotatef(roty, 0, 1, 0);
@@ -58,8 +79,16 @@ void motion(int x, int y)
         int diffy = y - lasty;
         lastx = x;
         lasty = y;
-        roty += (float) 0.2f * diffx;
-        rotx += (float) 0.2f * diffy;
+        if(pause){
+          roty += (float) 0.2f * diffx;
+          rotx += (float) 0.2f * diffy;
+        }else{
+            if(diffx>0&&car->zCoordinate > -(3.5/2)+0.35)
+              car->zCoordinate-=0.03;
+
+            if(diffx<0&&car->zCoordinate < (3.5/2)-0.35)
+              car->zCoordinate+=0.03;
+        }
 }
 
 void mouse(int b, int s, int x, int y) {
@@ -72,10 +101,9 @@ void render(void) {
         glPushMatrix();
         mouseRotation();
         drawRoad();
-        brick->update();
-        brick->draw();
+        drawBricks();
+        car->update();
         car->draw();
-        brick->draw();
         drawAxes();
         glPopMatrix();
         glutSwapBuffers();
@@ -87,11 +115,8 @@ void timer(int t) {
 }
 
 void keyboardHandler(unsigned char key, int x, int y) {
-        switch(key)
-        {
-          case 'd' :if(car->zCoordinate > -(3.5/2)+0.35)car->zCoordinate-=0.1 ;break;
-          case 'a' :if(car->zCoordinate < (3.5/2)-0.35)car->zCoordinate+=0.1;break;
-        }
+    if(key=='p')
+      pause = !pause;
 }
 
 int main(int argc, char** argv) {
@@ -124,6 +149,7 @@ int main(int argc, char** argv) {
         gluLookAt(0.0f, 5.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
         initRoad();
+        initBricks();
         initLighting();
 
 

@@ -33,6 +33,7 @@ using namespace std;
 #define CAMERA_SPEED 0.03f
 
 #define NUM_OF_ROADS 19
+#define NUM_OF_BRICKS 5
 
 const int FPS = 30;
 
@@ -44,7 +45,7 @@ extern float rotx;
 extern float roty;
 extern float rotz;
 extern float carSpeed;
-extern bool gameOver;
+extern bool gameOver,pause;
 extern GLuint asphaltTexture;
 extern GLuint grassTexture;
 extern GLuint brickTexture;

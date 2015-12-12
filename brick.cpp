@@ -8,8 +8,8 @@ void Brick::draw(){
 
   //brick
   glPushMatrix();
-  glTranslatef(0,0.25,this->zCoordinate);
-  glScalef(this->width,0.5,0.1);
+  glTranslatef(this->xCoordinate,0.25,this->zCoordinate);
+  glScalef(this->width,0.5,this->width);
   glEnable(GL_TEXTURE_2D);
   glColor3f(1.0f,1.0f,1.0f);
   glBindTexture(GL_TEXTURE_2D,brickTexture);
@@ -72,4 +72,6 @@ void Brick::draw(){
 
 void Brick::update(){
   zCoordinate += carSpeed;
+  if(zCoordinate>40)
+    zCoordinate = this->initialZCoordinate;
 }

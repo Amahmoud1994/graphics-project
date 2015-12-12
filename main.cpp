@@ -129,7 +129,7 @@ void keyboardHandler(unsigned char key, int x, int y) {
 void drawSkymap() {
         glPushMatrix();
         glScalef(200.0f,200.0f,200.0f);
-        glTranslatef(0.0,0.5,0.0);
+        glTranslatef(0.0,0.499,0.0);
         glEnable(GL_TEXTURE_2D);
         glColor3f(1.0f,1.0f,1.0f);
         glBindTexture(GL_TEXTURE_2D,skybox);

@@ -169,7 +169,7 @@ void decScore()
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
 
-  glutInitWindowSize(800, 600);
+  glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
   glutInitWindowPosition(150, 150);
 
   glutCreateWindow("Race the Moon");
@@ -184,12 +184,14 @@ int main(int argc, char** argv) {
 
   glEnable(GL_DEPTH_TEST);
 
+  initLighting();
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(45.0f, 800 / 600, 0.1f, 300.0f);
+  gluPerspective(45.0f, WINDOW_WIDTH / WINDOW_HEIGHT, 0.1f, 300.0f);
 
-  gluLookAt(7.0, 3.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+  gluLookAt(7.0, 3.0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+
   glutMainLoop();
 
   return 0;

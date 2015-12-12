@@ -69,4 +69,7 @@ void initLighting(){
         glEnable(GL_COLOR_MATERIAL);
         glEnable(GL_SMOOTH);
         glShadeModel(GL_SMOOTH);
+
+        GLfloat lightpos[] = {0.0f, 5.0f, 0.0f, 1.0f};
+        glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 }

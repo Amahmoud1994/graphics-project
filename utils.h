@@ -30,7 +30,7 @@ using namespace std;
 #define WINDOW_HEIGHT 600
 
 #define ABOVE_TERRAIN_LEVEL 0.3f
-#define CAMERA_SPEED 0.05f
+#define CAMERA_SPEED 0.03f
 
 const int FPS = 30;
 

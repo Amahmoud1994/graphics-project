@@ -85,9 +85,12 @@ void timer(int t) {
 }
 
 void keyboardHandler(unsigned char key, int x, int y) {
-        if(key=='s')
-                carSpeed+=0.001f;
-}
+        switch(key)
+        {
+          case 'd' :if(car->zCoordinate > -(3.5/2)+0.35)car->zCoordinate-=0.1 ;break;
+          case 'a' :if(car->zCoordinate < (3.5/2)-0.35)car->zCoordinate+=0.1;break;
+        }
+      }
 
 int main(int argc, char** argv) {
         glutInit(&argc, argv);

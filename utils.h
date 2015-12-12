@@ -49,6 +49,8 @@ extern GLuint asphaltTexture;
 extern GLuint grassTexture;
 extern GLuint brickTexture;
 
+extern GLuint skybox;
+
 
 int keyToNumeric(unsigned char key);
 int generateRandom(int min,int max);

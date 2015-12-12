@@ -22,6 +22,8 @@ GLuint asphaltTexture;
 GLuint grassTexture;
 GLuint brickTexture;
 
+GLuint skybox;
+
 int generateRandom(int min,int max){
         return int(min + (rand() % (int)(max - min + 1)));
 }
@@ -102,12 +104,21 @@ void loadTextures() {
                 SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
                 );
 
+
        brickTexture = SOIL_load_OGL_texture (
                         "textures/brick.jpg",
                         SOIL_LOAD_AUTO,
                         SOIL_CREATE_NEW_ID,
                         SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
                         );
+
+        skybox = SOIL_load_OGL_texture (
+                "textures/sky.jpg",
+                SOIL_LOAD_AUTO,
+                SOIL_CREATE_NEW_ID,
+                SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+                );
+
 
 
         if( 0 == asphaltTexture )

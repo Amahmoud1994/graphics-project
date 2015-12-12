@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <stddef.h>
+#include <stdio.h>
 #include "math.h"
 
 #include "car.h"
@@ -13,15 +14,33 @@ using namespace std;
 void timer(int);
 void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
-void initRoads();
-
+void initRoad();
+void drawRoad();
 Car* car = new Car();
 
-Road* roads[3];
-void initRoads(){
-  roads[0] = new Road(0);
-  roads[1] = new Road(15);
-  roads[2] = new Road(-15);
+int farestRoad = NUM_OF_ROADS-1;
+Road* roads[NUM_OF_ROADS];
+
+void initRoad(){
+  float pos = -(NUM_OF_ROADS/2.0)*15;
+  for(int i=0;i<NUM_OF_ROADS;i++){
+    roads[i] = new Road(pos);
+    pos+=15;
+  }
+
+}
+
+void drawRoad(){
+  for(int i=0;i<NUM_OF_ROADS;i++){
+    roads[i]->update();
+    roads[i]->draw();
+  }
+  if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15){
+    roads[farestRoad]->zCoordinate = -(NUM_OF_ROADS/2.0)*15;
+    farestRoad--;
+    if(farestRoad<0)
+      farestRoad = NUM_OF_ROADS-1;
+  }
 }
 void mouseRotation(){
         glRotatef(rotx, 1, 0, 0);
@@ -65,12 +84,7 @@ void render(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
         mouseRotation();
-        roads[0]->update();
-        roads[0]->draw();
-        roads[1]->update();
-        roads[1]->draw();
-        roads[2]->update();
-        roads[2]->draw();
+        drawRoad();
         car->draw();
         drawAxes();
         glPopMatrix();
@@ -114,7 +128,7 @@ int main(int argc, char** argv) {
         glLoadIdentity();
         gluLookAt(0.0f, 5.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
-        initRoads();
+        initRoad();
         initLighting();
 
         glutMainLoop();

@@ -32,6 +32,8 @@ using namespace std;
 #define ABOVE_TERRAIN_LEVEL 0.3f
 #define CAMERA_SPEED 0.03f
 
+#define NUM_OF_ROADS 7
+
 const int FPS = 30;
 
 extern unsigned char Buttons[3];

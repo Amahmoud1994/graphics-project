@@ -18,6 +18,8 @@ float carSpeed = 0.5f;
 
 bool gameOver =false;
 
+GLuint asphaltTexture;
+
 int generateRandom(int min,int max){
         return int(min + (rand() % (int)(max - min + 1)));
 }
@@ -82,8 +84,8 @@ void initLighting(){
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 }
 
-GLuint loadTexture(char* imagePath) {
-        GLuint texture = SOIL_load_OGL_texture (
+void loadTexture(char* imagePath) {
+        asphaltTexture = SOIL_load_OGL_texture (
                 imagePath,
                 SOIL_LOAD_AUTO,
                 SOIL_CREATE_NEW_ID,
@@ -94,11 +96,9 @@ GLuint loadTexture(char* imagePath) {
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);         // Linear Filtering
 
 
-        if( 0 == texture )
+        if( 0 == asphaltTexture )
         {
-                cout << "SOIL loading error: " << SOIL_last_result() <<endl;
+                cout << "SOIL loading error: " << SOIL_last_result() << endl;
         }
-
-        return texture;
 
 }

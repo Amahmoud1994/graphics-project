@@ -121,7 +121,6 @@ int main(int argc, char** argv) {
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
         glEnable(GL_DEPTH_TEST);
-        glEnable(GL_TEXTURE_2D);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
         glMatrixMode(GL_PROJECTION);
@@ -134,6 +133,8 @@ int main(int argc, char** argv) {
 
         initRoad();
         initLighting();
+
+        loadTexture("textures/asphalt.jpg");
 
         glutMainLoop();
 

@@ -18,14 +18,14 @@ void initRoad();
 void drawRoad();
 Car* car = new Car();
 
-int farestRoad = NUM_OF_ROADS-1;
+int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
 
 void initRoad(){
-  float pos = -(NUM_OF_ROADS/2.0)*15;
+  float pos = (NUM_OF_ROADS/2.0)*15;
   for(int i=0;i<NUM_OF_ROADS;i++){
     roads[i] = new Road(pos);
-    pos+=15;
+    pos-=15;
   }
 
 }
@@ -36,8 +36,9 @@ void drawRoad(){
     roads[i]->draw();
   }
   if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15){
-    roads[farestRoad]->zCoordinate = -(NUM_OF_ROADS/2.0)*15;
-    farestRoad--;
+    int nextIndex = (farestRoad+NUM_OF_ROADS-1)%NUM_OF_ROADS;
+    roads[farestRoad]->zCoordinate = roads[nextIndex]->zCoordinate-15;
+    farestRoad = (farestRoad+1)%NUM_OF_ROADS;
     if(farestRoad<0)
       farestRoad = NUM_OF_ROADS-1;
   }

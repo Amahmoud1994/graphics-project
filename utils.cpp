@@ -8,7 +8,7 @@ int lastx = 0;
 int lasty = 0;
 int gameScore=4;
 
-float carSpeed = 0.05f;
+float carSpeed = 0.5f;
 
 bool gameOver =false;
 

@@ -37,7 +37,7 @@ void drawRoad(){
   }
   if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15){
     int nextIndex = (farestRoad+NUM_OF_ROADS-1)%NUM_OF_ROADS;
-    roads[farestRoad]->zCoordinate = roads[nextIndex]->zCoordinate-15;
+    roads[farestRoad]->zCoordinate = roads[nextIndex]->zCoordinate-14.7;
     farestRoad = (farestRoad+1)%NUM_OF_ROADS;
     if(farestRoad<0)
       farestRoad = NUM_OF_ROADS-1;

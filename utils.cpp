@@ -17,6 +17,7 @@ int gameScore=4;
 float carSpeed = 0.5f;
 
 bool gameOver =false;
+bool pause = false;
 
 GLuint asphaltTexture;
 GLuint grassTexture;

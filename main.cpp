@@ -27,7 +27,6 @@ void render(void) {
   // Camera
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  gluLookAt(7.0, 3.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
   if(!gameOver)
   {
   glRotatef(rotx, 1, 0, 0);
@@ -183,26 +182,12 @@ int main(int argc, char** argv) {
 
   glEnable(GL_DEPTH_TEST);
 
-// for the Texturing Go step by step
 
-/**
-
-GLuint texEarthID;
-
-glEnable(GL_DEPTH_TEST);
-glEnable(GL_TEXTURE_2D);
-glEnable(GL_CULL_FACE);
-
-loadBMP(&texEarthID, "textures/earth.bmp");
-
-//Then when loading the object
-glBindTexture(GL_TEXTURE_2D,texEarthID);
-
-*/
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(45.0f, 800 / 600, 0.1f, 300.0f);
 
+  gluLookAt(7.0, 3.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
   glutMainLoop();
 
   return 0;

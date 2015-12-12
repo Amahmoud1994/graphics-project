@@ -47,6 +47,7 @@ extern float carSpeed;
 extern bool gameOver;
 extern GLuint asphaltTexture;
 extern GLuint grassTexture;
+extern GLuint brickTexture;
 
 
 int keyToNumeric(unsigned char key);

@@ -10,6 +10,7 @@
 #include "utils.h"
 #include "car.h"
 #include "road.h"
+#include "brick.h"
 
 using namespace std;
 void timer(int);
@@ -17,7 +18,9 @@ void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
 void initRoad();
 void drawRoad();
+
 Car* car = new Car();
+Brick* brick=new Brick( 2,2);
 
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
@@ -88,6 +91,7 @@ void render(void) {
         mouseRotation();
         drawRoad();
         car->draw();
+        brick->draw();
         drawAxes();
         glPopMatrix();
         glutSwapBuffers();
@@ -121,7 +125,7 @@ int main(int argc, char** argv) {
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
         loadTextures();
-        
+
         glEnable(GL_DEPTH_TEST);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 

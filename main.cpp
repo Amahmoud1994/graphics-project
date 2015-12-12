@@ -18,8 +18,9 @@ void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
 void initRoad();
 void drawRoad();
+void drawGrassWorld();
 
-void skymapTest();
+void drawSkymap();
 
 Car* car = new Car();
 Brick* brick=new Brick( 2,2);
@@ -79,7 +80,8 @@ void render(void) {
         car->draw();
         brick->draw();
         drawAxes();
-        skymapTest();
+        drawSkymap();
+        drawGrassWorld();
         glPopMatrix();
         glutSwapBuffers();
 }
@@ -92,14 +94,15 @@ void timer(int t) {
 void keyboardHandler(unsigned char key, int x, int y) {
         switch(key)
         {
-          case 'd' :if(car->zCoordinate > -(3.5/2)+0.35)car->zCoordinate-=0.1 ;break;
-          case 'a' :if(car->zCoordinate < (3.5/2)-0.35)car->zCoordinate+=0.1;break;
+        case 'd': if(car->zCoordinate > -(3.5/2)+0.35) car->zCoordinate-=0.1; break;
+        case 'a': if(car->zCoordinate < (3.5/2)-0.35) car->zCoordinate+=0.1; break;
         }
-      }
+}
 
-void skymapTest() {
+void drawSkymap() {
         glPushMatrix();
         glScalef(200.0f,200.0f,200.0f);
+        glTranslatef(0.0,0.5,0.0);
         glEnable(GL_TEXTURE_2D);
         glColor3f(1.0f,1.0f,1.0f);
         glBindTexture(GL_TEXTURE_2D,skybox);
@@ -116,12 +119,6 @@ void skymapTest() {
         glVertex3f(0.5f, 0.5f, -0.5f);
         glTexCoord2f(0.0, 0.0);
         glVertex3f( -0.5, 0.5f, -0.5f);
-
-        glNormal3f(0.0f,-1.0f,0.0f);
-        glTexCoord2f(1.0, 0.0); glVertex3f( -0.5f, -0.5f,0.5f); // Bottom
-        glTexCoord2f(1.0, 1.0); glVertex3f(0.5f, -0.5f,0.5f);
-        glTexCoord2f(1.0, 0.0); glVertex3f(0.5f, -0.5f, -0.5f);
-        glTexCoord2f(0.0, 0.0); glVertex3f( -0.5, -0.5f, -0.5f);
 
         glNormal3f(1.0f,0.0f,0.0f);
         glTexCoord2f(1.0, 0.0); glVertex3f(0.5f, -0.5f,0.5f); // Right
@@ -151,6 +148,30 @@ void skymapTest() {
         glDisable(GL_TEXTURE_2D);
         glEnable(GL_LIGHTING);
         glPopMatrix();
+}
+
+void drawGrassWorld() {
+
+        glPushMatrix();
+        glScalef(200.0f,1.0f,200.0f);
+        glTranslatef(0.0,0.42f,0.0f);
+        glEnable(GL_TEXTURE_2D);
+        glColor3f(1.0f,1.0f,1.0f);
+        glBindTexture(GL_TEXTURE_2D,grassTexture);
+
+        glDisable(GL_LIGHTING);
+
+        glBegin(GL_QUADS);
+        glNormal3f(0.0f,-1.0f,0.0f);
+        glTexCoord2f(1.0, 0.0); glVertex3f( -0.5f, -0.5f,0.5f);   // Bottom
+        glTexCoord2f(1.0, 1.0); glVertex3f(0.5f, -0.5f,0.5f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(0.5f, -0.5f, -0.5f);
+        glTexCoord2f(0.0, 0.0); glVertex3f( -0.5, -0.5f, -0.5f);
+        glEnd();
+        glDisable(GL_TEXTURE_2D);
+        glEnable(GL_LIGHTING);
+        glPopMatrix();
+
 }
 
 int main(int argc, char** argv) {

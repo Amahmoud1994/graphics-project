@@ -41,6 +41,7 @@ extern int gameScore;
 extern float rotx;
 extern float roty;
 extern float rotz;
+extern float carSpeed;
 extern bool gameOver;
 
 

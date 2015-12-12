@@ -7,6 +7,7 @@
 #include "math.h"
 
 #include "car.h"
+#include "road.h"
 
 using namespace std;
 void timer(int);
@@ -14,6 +15,7 @@ void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
 
 Car* car = new Car();
+Road* road = new Road(-5.0f);
 
 void mouseRotation(){
         glRotatef(rotx, 1, 0, 0);
@@ -57,6 +59,8 @@ void render(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
         mouseRotation();
+        road->update();
+        road->draw();
         car->draw();
         drawAxes();
         glPopMatrix();

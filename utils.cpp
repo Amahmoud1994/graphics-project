@@ -8,6 +8,8 @@ int lastx = 0;
 int lasty = 0;
 int gameScore=4;
 
+float carSpeed = 0.005f; 
+
 bool gameOver =false;
 
 int generateRandom(int min,int max){

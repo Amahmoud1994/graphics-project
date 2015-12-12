@@ -27,7 +27,7 @@ void render(void) {
   // Camera
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  gluLookAt(20.0, 4.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+  gluLookAt(7.0, 3.0, 0.0, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
   if(!gameOver)
   {
   glRotatef(rotx, 1, 0, 0);
@@ -44,7 +44,6 @@ void render(void) {
   terrain->draw();
 
   // Car
-  glScaled(2,2,2);
   car->draw();
 
   // Bricks

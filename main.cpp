@@ -13,11 +13,16 @@ using namespace std;
 void timer(int);
 void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
+void initRoads();
 
 Car* car = new Car();
-Road* road1 = new Road(-5.0f);
-Road* road2 = new Road(10.0f);
 
+Road* roads[3];
+void initRoads(){
+  roads[0] = new Road(0);
+  roads[1] = new Road(15);
+  roads[2] = new Road(-15);
+}
 void mouseRotation(){
         glRotatef(rotx, 1, 0, 0);
         glRotatef(roty, 0, 1, 0);
@@ -60,10 +65,12 @@ void render(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
         mouseRotation();
-        road1->update();
-        road1->draw();
-        road2->update();
-        road2->draw();
+        roads[0]->update();
+        roads[0]->draw();
+        roads[1]->update();
+        roads[1]->draw();
+        roads[2]->update();
+        roads[2]->draw();
         car->draw();
         drawAxes();
         glPopMatrix();
@@ -107,6 +114,7 @@ int main(int argc, char** argv) {
         glLoadIdentity();
         gluLookAt(0.0f, 5.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
+        initRoads();
         initLighting();
 
         glutMainLoop();

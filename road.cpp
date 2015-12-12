@@ -39,7 +39,7 @@ void Road::drawWhiteLine(float zCoordinate){
 void drawGrass(){
         // grass
         glPushMatrix();
-        glTranslatef(2.75,0.0f,0.0f);
+        glTranslatef(2.75,0.1f,0.0f);
         glScalef(2.0f,0.1f,15);
         glEnable(GL_TEXTURE_2D);
         glColor3f(1.0f,1.0f,1.0f);
@@ -90,7 +90,7 @@ void drawGrass(){
 
         // grass
         glPushMatrix();
-        glTranslatef(-2.75,0.0f,0.0f);
+        glTranslatef(-2.75,0.1f,0.0f);
         glScalef(2.0f,0.1f,15);
         glEnable(GL_TEXTURE_2D);
         glColor3f(1.0f,1.0f,1.0f);

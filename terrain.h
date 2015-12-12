@@ -16,7 +16,6 @@ public:
   float pathLinesWidth;
   float pathLinesLength;
   int lineOrgPos;
-  bool visible;
 
   Terrain() {
     xCoordinate = -25;

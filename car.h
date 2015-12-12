@@ -11,7 +11,6 @@ private:
   void drawWheel();
 public:
   int health;
-  bool visible;
 
   Car() {
     this->xCoordinate = 1;

@@ -31,7 +31,6 @@ void initRoad(){
     roads[i] = new Road(pos);
     pos-=15;
   }
-
 }
 
 void drawRoad(){
@@ -59,30 +58,13 @@ void motion(int x, int y)
         int diffy = y - lasty;
         lastx = x;
         lasty = y;
-        if (Buttons[0])
-        {
-                rotx += (float) 0.2f * diffy;
-                roty += (float) 0.2f * diffx;
-        }
+        roty += (float) 0.2f * diffx;
+        rotx += (float) 0.2f * diffy;
 }
 
 void mouse(int b, int s, int x, int y) {
         lastx = x;
         lasty = y;
-
-        switch (b) {
-        case GLUT_LEFT_BUTTON:
-                Buttons[0] = ((GLUT_DOWN == s) ? 1 : 0);
-                break;
-        case GLUT_MIDDLE_BUTTON:
-                Buttons[1] = ((GLUT_DOWN == s) ? 1 : 0);
-                break;
-        case GLUT_RIGHT_BUTTON:
-                Buttons[2] = ((GLUT_DOWN == s) ? 1 : 0);
-                break;
-        default:
-                break;
-        }
 }
 
 void render(void) {
@@ -98,7 +80,6 @@ void render(void) {
 }
 
 void timer(int t) {
-
         glutPostRedisplay();
         glutTimerFunc(FPS, timer, 0);
 }

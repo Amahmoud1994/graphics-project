@@ -7,7 +7,6 @@
 
 class Cone : public Drawable {
 public:
-  bool visible;
 
   Cone(float xCoordinate, float zCoordinate) {
     this->xCoordinate = xCoordinate;

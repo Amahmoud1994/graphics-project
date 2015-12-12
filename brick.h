@@ -7,7 +7,6 @@
 
 class Brick : public Drawable {
 public:
-  bool visible;
 
   Brick(float xCoordinate, float zCoordinate) {
     this->xCoordinate = xCoordinate;

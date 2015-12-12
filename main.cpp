@@ -17,32 +17,33 @@ void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
 void initRoad();
 void drawRoad();
+void skymapTest();
 Car* car = new Car();
 
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
 
 void initRoad(){
-  float pos = (NUM_OF_ROADS/2.0)*15;
-  for(int i=0;i<NUM_OF_ROADS;i++){
-    roads[i] = new Road(pos);
-    pos-=15;
-  }
+        float pos = (NUM_OF_ROADS/2.0)*15;
+        for(int i=0; i<NUM_OF_ROADS; i++) {
+                roads[i] = new Road(pos);
+                pos-=15;
+        }
 
 }
 
 void drawRoad(){
-  for(int i=0;i<NUM_OF_ROADS;i++){
-    roads[i]->update();
-    roads[i]->draw();
-  }
-  if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15){
-    int nextIndex = (farestRoad+NUM_OF_ROADS-1)%NUM_OF_ROADS;
-    roads[farestRoad]->zCoordinate = roads[nextIndex]->zCoordinate-14.7;
-    farestRoad = (farestRoad+1)%NUM_OF_ROADS;
-    if(farestRoad<0)
-      farestRoad = NUM_OF_ROADS-1;
-  }
+        for(int i=0; i<NUM_OF_ROADS; i++) {
+                roads[i]->update();
+                roads[i]->draw();
+        }
+        if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15) {
+                int nextIndex = (farestRoad+NUM_OF_ROADS-1)%NUM_OF_ROADS;
+                roads[farestRoad]->zCoordinate = roads[nextIndex]->zCoordinate-14.7;
+                farestRoad = (farestRoad+1)%NUM_OF_ROADS;
+                if(farestRoad<0)
+                        farestRoad = NUM_OF_ROADS-1;
+        }
 }
 void mouseRotation(){
         glRotatef(rotx, 1, 0, 0);
@@ -89,6 +90,7 @@ void render(void) {
         drawRoad();
         car->draw();
         drawAxes();
+        skymapTest();
         glPopMatrix();
         glutSwapBuffers();
 }
@@ -102,6 +104,62 @@ void timer(int t) {
 void keyboardHandler(unsigned char key, int x, int y) {
         if(key=='s')
                 carSpeed+=0.001f;
+}
+
+void skymapTest() {
+        glPushMatrix();
+        glScalef(200.0f,200.0f,200.0f);
+        glEnable(GL_TEXTURE_2D);
+        glColor3f(1.0f,1.0f,1.0f);
+        glBindTexture(GL_TEXTURE_2D,skybox);
+
+        glDisable(GL_LIGHTING);
+
+        glBegin(GL_QUADS);
+        glNormal3f(0.0f,1.0f,0.0f); // Top
+        glTexCoord2f(1.0, 0.0);
+        glVertex3f( -0.5f, 0.5f,0.5f);
+        glTexCoord2f(1.0, 1.0);
+        glVertex3f(0.5f, 0.5f,0.5f);
+        glTexCoord2f(1.0, 0.0);
+        glVertex3f(0.5f, 0.5f, -0.5f);
+        glTexCoord2f(0.0, 0.0);
+        glVertex3f( -0.5, 0.5f, -0.5f);
+
+        glNormal3f(0.0f,-1.0f,0.0f);
+        glTexCoord2f(1.0, 0.0); glVertex3f( -0.5f, -0.5f,0.5f); // Bottom
+        glTexCoord2f(1.0, 1.0); glVertex3f(0.5f, -0.5f,0.5f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(0.5f, -0.5f, -0.5f);
+        glTexCoord2f(0.0, 0.0); glVertex3f( -0.5, -0.5f, -0.5f);
+
+        glNormal3f(1.0f,0.0f,0.0f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(0.5f, -0.5f,0.5f); // Right
+        glTexCoord2f(1.0, 1.0); glVertex3f(0.5f, -0.5f,-0.5f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(0.5f, 0.5f, -0.5f);
+        glTexCoord2f(0.0, 0.0); glVertex3f(0.5,  0.5f, 0.5f);
+
+        glNormal3f(-1.0f,0.0f,0.0f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(-0.5f, -0.5f,0.5f); // Left
+        glTexCoord2f(1.0, 1.0); glVertex3f(-0.5f, -0.5f,-0.5f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(-0.5f, 0.5f, -0.5f);
+        glTexCoord2f(0.0, 0.0); glVertex3f(-0.5,  0.5f, 0.5f);
+
+        glNormal3f(0.0f,0.0f,-1.0f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(-0.5f, -0.5f, -0.5f); // Back
+        glTexCoord2f(1.0, 1.0); glVertex3f(0.5f, -0.5f,-0.5f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(0.5f, 0.5f, -0.5f);
+        glTexCoord2f(0.0, 0.0); glVertex3f(-0.5,  0.5f, -0.5f);
+
+        glNormal3f(0.0f,0.0f,1.0f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(-0.5f, -0.5f, 0.5f); // Front
+        glTexCoord2f(1.0, 1.0); glVertex3f(0.5f, -0.5f,0.5f);
+        glTexCoord2f(1.0, 0.0); glVertex3f(0.5f, 0.5f, 0.5f);
+        glTexCoord2f(0.0, 0.0); glVertex3f(-0.5,  0.5f, 0.5f);
+
+        glEnd();
+        glDisable(GL_TEXTURE_2D);
+        glEnable(GL_LIGHTING);
+        glPopMatrix();
 }
 
 int main(int argc, char** argv) {
@@ -121,7 +179,7 @@ int main(int argc, char** argv) {
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
         loadTextures();
-        
+
         glEnable(GL_DEPTH_TEST);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 

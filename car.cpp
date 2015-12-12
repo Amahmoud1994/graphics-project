@@ -4,7 +4,8 @@ void Car::draw(){
   if(!this->visible) {
     return;
   }
-
+  glPushMatrix();
+  glRotatef(-90,0,1,0);
   // Start wheels
   glPushMatrix();
   glTranslatef(0.6f,-0.2f,0.1f);
@@ -44,6 +45,7 @@ void Car::draw(){
   glColor3f((92/255.0),(51/255.0),(23/255.0));
   glTranslatef(this->xCoordinate+0.25,this->yCoordinate-0.05,this->zCoordinate+0.6);
   glutSolidCube(0.2);
+  glPopMatrix();
   glPopMatrix();
 }
 

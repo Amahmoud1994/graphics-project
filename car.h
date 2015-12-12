@@ -13,7 +13,7 @@ public:
   int health;
 
   Car() {
-    this->xCoordinate = 1;
+    this->xCoordinate = 0;
     this->yCoordinate = ABOVE_TERRAIN_LEVEL;
     this->zCoordinate = 0;
     this->health      = 3;

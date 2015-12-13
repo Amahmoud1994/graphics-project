@@ -13,6 +13,7 @@ void Cone::draw(){
   float h=1;
  glEnable(GL_TEXTURE_2D);
  glBindTexture(GL_TEXTURE_2D, coneTexture);
+ glDisable(GL_LIGHTING);
   float t,s;
   //The i controlles how many layers will we draw
   // so it will take a lot of processing so we will increament the t & s by 1/2 i
@@ -41,6 +42,7 @@ void Cone::draw(){
   }
 
   glDisable(GL_TEXTURE_2D);
+  glEnable(GL_LIGHTING);
   glPopMatrix();
 }
 

@@ -17,6 +17,7 @@ void timer(int);
 void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
 void initRoad();
+void displayTime();
 void initBricks();
 void drawRoad();
 void drawBricks();
@@ -115,14 +116,7 @@ void render(void) {
         drawAxes();
         drawSkymap();
         drawGrassWorld();
-        drawBitmapText("Time :",1,11,1);
-        int number=gameTimer;
-	      stringstream strs;
-	      strs << number;
-	      string temp_str = strs.str();
-	      char* char_type = (char*) temp_str.c_str();
-	      drawBitmapText(char_type,2.1,11,1);
-
+        displayTime();
         glPopMatrix();
         glutSwapBuffers();
 }
@@ -145,6 +139,16 @@ void keyboardHandler(unsigned char key, int x, int y) {
     }
 }
 
+void displayTime()
+{
+  drawBitmapText("Time :",1,11,1);
+  int number=gameTimer;
+  stringstream strs;
+  strs << number;
+  string temp_str = strs.str();
+  char* char_type = (char*) temp_str.c_str();
+  drawBitmapText(char_type,2.1,11,1);
+}
 void drawSkymap() {
         glPushMatrix();
         glScalef(200.0f,200.0f,200.0f);

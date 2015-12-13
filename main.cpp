@@ -25,7 +25,7 @@ void drawGrassWorld();
 void drawSkymap();
 
 Car* car = new Car();
-
+float angleRot=0.0;
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
 Brick* bricks[NUM_OF_BRICKS];
@@ -108,6 +108,8 @@ void mouse(int b, int s, int x, int y) {
 void render(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
+        glRotatef(angleRot,0,1,0);
+        glPushMatrix();
         mouseRotation();
         drawRoad();
         drawBricks();
@@ -119,6 +121,8 @@ void render(void) {
         drawSkymap();
         drawGrassWorld();
         glPopMatrix();
+        glPopMatrix();
+
         glutSwapBuffers();
 }
 
@@ -136,6 +140,8 @@ void keyboardHandler(unsigned char key, int x, int y) {
       gameOver = false;
       car->xCoordinate = 0;
     }
+    if(key=='h')
+    angleRot+=1;
 }
 
 void drawSkymap() {

@@ -53,7 +53,7 @@ void initBricks(){
 
 bool carHitBrick(Brick* brick)
 {
-  if(abs(car->xCoordinate - brick->xCoordinate)<1 && abs(car->yCoordinate - brick->yCoordinate) < 1 && abs(car->zCoordinate - brick->zCoordinate < 1))
+  if(abs(car->xCoordinate - brick->xCoordinate + brick->width)<1 && abs(car->yCoordinate - brick->yCoordinate) < 1 && abs(car->zCoordinate - brick->zCoordinate < 1))
   return true;
 
   return false;
@@ -86,8 +86,6 @@ void drawBricks(){
     if(!pause)
       bricks[i]->update();
     bricks[i]->draw();
-    if(carHitBrick(bricks[i]))
-    gameOver=true;
   }
 }
 
@@ -133,7 +131,11 @@ void render(void) {
         if(gameOver)
           car->update();
         car->draw();
-        cone->draw();
+        //cone->draw();
+        for (size_t i = 0; i < NUM_OF_BRICKS; i++) {
+          if(carHitBrick(bricks[i]))
+            std::cout << "Car Hits Brick" << std::endl;
+        }
         drawAxes();
         drawSkymap();
         drawGrassWorld();

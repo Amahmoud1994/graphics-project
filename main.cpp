@@ -11,6 +11,7 @@
 #include "car.h"
 #include "road.h"
 #include "brick.h"
+#include "cone.h"
 
 using namespace std;
 void timer(int);
@@ -22,12 +23,14 @@ void drawRoad();
 void drawBricks();
 void drawGrassWorld();
 void drawSkymap();
+bool carHitBrick(Brick,Car);
 
 Car* car = new Car();
-
+float angleRot=0.0;
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
 Brick* bricks[NUM_OF_BRICKS];
+Cone* cone = new Cone(1,2);
 
 void initRoad(){
 
@@ -48,27 +51,43 @@ void initBricks(){
   }
 }
 
-void drawRoad(){
+bool carHitBrick(Brick* brick)
+{
+  if(abs(car->xCoordinate - brick->xCoordinate)<1 && abs(car->yCoordinate - brick->yCoordinate) < 1 && abs(car->zCoordinate - brick->zCoordinate < 1))
+  return true;
+
+  return false;
+
+}
+
+void drawRoad()
+{
 
 for(int i=0;i<NUM_OF_ROADS;i++){
     if(!pause)
       roads[i]->update();
     roads[i]->draw();
   }
-  if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15){
+
+  if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15)
+  {
     int nextIndex = (farestRoad+NUM_OF_ROADS-1)%NUM_OF_ROADS;
     roads[farestRoad]->zCoordinate = roads[nextIndex]->zCoordinate-14.7;
     farestRoad = (farestRoad+1)%NUM_OF_ROADS;
     if(farestRoad<0)
       farestRoad = NUM_OF_ROADS-1;
   }
+
 }
 
 void drawBricks(){
+
   for(int i=0;i<NUM_OF_BRICKS;i++){
     if(!pause)
       bricks[i]->update();
     bricks[i]->draw();
+    if(carHitBrick(bricks[i]))
+    gameOver=true;
   }
 }
 
@@ -106,16 +125,21 @@ void mouse(int b, int s, int x, int y) {
 void render(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
+        glRotatef(angleRot,0,1,0);
+        glPushMatrix();
         mouseRotation();
         drawRoad();
         drawBricks();
         if(gameOver)
           car->update();
         car->draw();
+        cone->draw();
         drawAxes();
         drawSkymap();
         drawGrassWorld();
         glPopMatrix();
+        glPopMatrix();
+
         glutSwapBuffers();
 }
 
@@ -133,6 +157,8 @@ void keyboardHandler(unsigned char key, int x, int y) {
       gameOver = false;
       car->xCoordinate = 0;
     }
+    if(key=='h')
+    angleRot+=0.1;
 }
 
 void drawSkymap() {

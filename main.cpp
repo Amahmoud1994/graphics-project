@@ -124,6 +124,11 @@ void render(void) {
 void timer(int t) {
     if(!pause)
         gameTimer+=0.05;
+    if(int(gameTimer) % 40 ==0)
+    {
+    speedAcceleration+=0.005;
+    carSpeed=speedAcceleration;
+    }
     glutPostRedisplay();
     glutTimerFunc(FPS, timer, 0);
 }

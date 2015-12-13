@@ -45,6 +45,7 @@ extern float rotx;
 extern float roty;
 extern float rotz;
 extern float carSpeed;
+extern float speedAcceleration;
 extern bool gameOver,pause;
 extern GLuint asphaltTexture;
 extern GLuint grassTexture;

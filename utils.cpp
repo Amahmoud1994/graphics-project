@@ -14,8 +14,8 @@ int lastx = 0;
 int lasty = 0;
 int gameScore=4;
 float gameTimer=0;
-
-float carSpeed = 0.5f;
+float speedAcceleration=0.5f;
+float carSpeed = speedAcceleration;
 
 bool gameOver =false;
 bool pause = false;

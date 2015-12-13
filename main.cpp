@@ -11,12 +11,15 @@
 #include "car.h"
 #include "road.h"
 #include "brick.h"
+#include "cone.h"
 
 using namespace std;
 void timer(int);
 void keyboardHandler(unsigned char, int, int);
 void mouseRotation();
+void Switch_Key(int, int, int);
 void initRoad();
+void displayTime();
 void initBricks();
 void drawRoad();
 void drawBricks();
@@ -24,10 +27,12 @@ void drawGrassWorld();
 void drawSkymap();
 
 Car* car = new Car();
-
+float angleRotY=0.0;
+float angleRotX=0.0;
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
 Brick* bricks[NUM_OF_BRICKS];
+Cone* cones[NUM_OF_BRICKS];
 
 void initRoad(){
 
@@ -70,7 +75,7 @@ void drawBricks(){
       bricks[i]->update();
       if(fabs(bricks[i]->zCoordinate-car->xCoordinate)<=1){
         if(fabs(bricks[i]->xCoordinate-car->zCoordinate)<=1){
-          printf("now\n");
+          
         }
       }
     }
@@ -112,6 +117,9 @@ void mouse(int b, int s, int x, int y) {
 void render(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
+        glRotatef(angleRotY,0,1,0);
+        glRotatef(angleRotX,1,0,0);
+        glPushMatrix();
         mouseRotation();
         drawRoad();
         drawBricks();
@@ -121,26 +129,59 @@ void render(void) {
         drawAxes();
         drawSkymap();
         drawGrassWorld();
+        if(gameOver)
+        {
+          car->update();
+          drawBitmapText("You Lost!! Good Luck Next Time",1,9,1);
+        }
+        car->draw();
+        displayTime();
         glPopMatrix();
+        glPopMatrix();
+
         glutSwapBuffers();
 }
 
 void timer(int t) {
-        glutPostRedisplay();
-        glutTimerFunc(FPS, timer, 0);
+    if(!pause && !gameOver)
+        gameTimer+=0.05;
+    if(int(gameTimer) % 40 ==0)
+    {
+    speedAcceleration+=0.005;
+    carSpeed=speedAcceleration;
+    }
+    glutPostRedisplay();
+    glutTimerFunc(FPS, timer, 0);
 }
 
 void keyboardHandler(unsigned char key, int x, int y) {
-    if(key=='p')
-      pause = !pause;
-    if(key=='g')
-      gameOver = true;
-    if(key=='r'){
-      gameOver = false;
-      car->xCoordinate = 0;
+    switch (key) {
+      case 'p':  pause = !pause;break;
+      case 'g':  gameOver = true;break;
+      case 'r':  gameOver = false;car->xCoordinate = 0;break;
     }
 }
 
+void Switch_Key(int key, int x, int y)
+{
+  switch (key) {
+    case GLUT_KEY_UP:if(angleRotX<40)angleRotX++;break;
+    case GLUT_KEY_DOWN:if(angleRotX>-15)angleRotX--;break;
+    case GLUT_KEY_LEFT:angleRotY++;break;
+    case GLUT_KEY_RIGHT:angleRotY--;break;
+  }
+}
+void displayTime()
+{
+
+  drawBitmapText("Time :",1,11,1);
+  int number=gameTimer;
+  stringstream strs;
+  strs << number;
+  string temp_str = strs.str();
+  char* char_type = (char*) temp_str.c_str();
+  drawBitmapText(char_type,2.1,11,1);
+}
 void drawSkymap() {
         glPushMatrix();
         glScalef(200.0f,200.0f,200.0f);
@@ -227,6 +268,7 @@ int main(int argc, char** argv) {
         glutMotionFunc(motion);
         glutMouseFunc(mouse);
         glutKeyboardFunc(keyboardHandler);
+        glutSpecialFunc(Switch_Key);
 
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);

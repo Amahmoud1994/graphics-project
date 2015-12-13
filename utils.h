@@ -45,13 +45,16 @@ extern float rotx;
 extern float roty;
 extern float rotz;
 extern float carSpeed;
+extern float speedAcceleration;
 extern bool gameOver,pause;
 extern GLuint asphaltTexture;
 extern GLuint grassTexture;
+extern GLuint coneTexture;
 extern GLuint brickTexture;
 
 extern GLuint skybox;
 
+extern float gameTimer;
 
 int keyToNumeric(unsigned char key);
 int generateRandom(int min,int max);

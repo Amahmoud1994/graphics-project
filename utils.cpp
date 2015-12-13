@@ -13,8 +13,9 @@ float rotz = 0;
 int lastx = 0;
 int lasty = 0;
 int gameScore=4;
-
-float carSpeed = 0.5f;
+float gameTimer=0;
+float speedAcceleration=0.5f;
+float carSpeed = speedAcceleration;
 
 bool gameOver =false;
 bool pause = false;
@@ -22,6 +23,7 @@ bool pause = false;
 GLuint asphaltTexture;
 GLuint grassTexture;
 GLuint brickTexture;
+GLuint coneTexture;
 
 GLuint skybox;
 
@@ -62,7 +64,7 @@ void drawBitmapText(string text, float x, float y, float z) {
         glDisable( GL_DEPTH_TEST );
         glDisable(GL_LIGHTING);
 
-        glColor3f(1.0, 0.0, 0.0);
+        glColor3f(102/255, 89/255, 92/255);
         glRasterPos2i(x*50, y*50);
 
         for (unsigned int i = 0; i < text.size(); i++) {
@@ -112,6 +114,12 @@ void loadTextures() {
                         SOIL_CREATE_NEW_ID,
                         SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
                         );
+      coneTexture = SOIL_load_OGL_texture (
+                       "textures/cone_material.jpg",
+                       SOIL_LOAD_AUTO,
+                       SOIL_CREATE_NEW_ID,
+                       SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+                       );
 
         skybox = SOIL_load_OGL_texture (
                 "textures/sky.jpg",

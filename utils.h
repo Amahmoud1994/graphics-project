@@ -52,6 +52,7 @@ extern GLuint brickTexture;
 
 extern GLuint skybox;
 
+extern float gameTimer;
 
 int keyToNumeric(unsigned char key);
 int generateRandom(int min,int max);

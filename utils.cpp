@@ -13,6 +13,7 @@ float rotz = 0;
 int lastx = 0;
 int lasty = 0;
 int gameScore=4;
+float gameTimer=0;
 
 float carSpeed = 0.5f;
 
@@ -62,7 +63,7 @@ void drawBitmapText(string text, float x, float y, float z) {
         glDisable( GL_DEPTH_TEST );
         glDisable(GL_LIGHTING);
 
-        glColor3f(1.0, 0.0, 0.0);
+        glColor3f(102/255, 89/255, 92/255);
         glRasterPos2i(x*50, y*50);
 
         for (unsigned int i = 0; i < text.size(); i++) {

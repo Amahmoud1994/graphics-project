@@ -115,13 +115,23 @@ void render(void) {
         drawAxes();
         drawSkymap();
         drawGrassWorld();
+        drawBitmapText("Time :",1,11,1);
+        int number=gameTimer;
+	      stringstream strs;
+	      strs << number;
+	      string temp_str = strs.str();
+	      char* char_type = (char*) temp_str.c_str();
+	      drawBitmapText(char_type,2.1,11,1);
+
         glPopMatrix();
         glutSwapBuffers();
 }
 
 void timer(int t) {
-        glutPostRedisplay();
-        glutTimerFunc(FPS, timer, 0);
+    if(!pause)
+        gameTimer+=0.05;
+    glutPostRedisplay();
+    glutTimerFunc(FPS, timer, 0);
 }
 
 void keyboardHandler(unsigned char key, int x, int y) {

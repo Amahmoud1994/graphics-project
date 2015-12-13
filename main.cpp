@@ -40,7 +40,7 @@ void initRoad(){
 }
 
 void initBricks(){
-  float pos = -(NUM_OF_ROADS/2.0)*NUM_OF_BRICKS*5;
+  float pos = -(NUM_OF_ROADS/2.0)*50;
   float xCoordinates[3] = {1,0,-1};
   for(int i=0;i<NUM_OF_BRICKS;i++){
     bricks[i] = new Brick(i,xCoordinates[i%3],pos,1);
@@ -82,18 +82,20 @@ void motion(int x, int y)
 {
         int diffx = x - lastx;
         int diffy = y - lasty;
-        lastx = x;
-        lasty = y;
         if(pause){
           roty += (float) 0.2f * diffx;
           rotx += (float) 0.2f * diffy;
         }else{
+            if(gameOver)
+                return;
             if(diffx>0&&car->zCoordinate > -(3.5/2)+0.35)
               car->zCoordinate-=0.03;
 
             if(diffx<0&&car->zCoordinate < (3.5/2)-0.35)
               car->zCoordinate+=0.03;
         }
+        lastx = x;
+        lasty = y;
 }
 
 void mouse(int b, int s, int x, int y) {
@@ -107,7 +109,8 @@ void render(void) {
         mouseRotation();
         drawRoad();
         drawBricks();
-        car->update();
+        if(gameOver)
+          car->update();
         car->draw();
         drawAxes();
         drawSkymap();
@@ -124,6 +127,12 @@ void timer(int t) {
 void keyboardHandler(unsigned char key, int x, int y) {
     if(key=='p')
       pause = !pause;
+    if(key=='g')
+      gameOver = true;
+    if(key=='r'){
+      gameOver = false;
+      car->xCoordinate = 0;
+    }
 }
 
 void drawSkymap() {

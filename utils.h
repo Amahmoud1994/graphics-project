@@ -33,7 +33,7 @@ using namespace std;
 #define CAMERA_SPEED 0.03f
 
 #define NUM_OF_ROADS 19
-#define NUM_OF_BRICKS 5
+#define NUM_OF_BRICKS 30
 
 const int FPS = 30;
 

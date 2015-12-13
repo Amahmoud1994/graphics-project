@@ -114,9 +114,6 @@ void render(void) {
         mouseRotation();
         drawRoad();
         drawBricks();
-        if(gameOver)
-          car->update();
-        car->draw();
         drawAxes();
         drawSkymap();
         drawGrassWorld();

@@ -93,11 +93,13 @@ void motion(int x, int y)
         }else{
             if(gameOver)
                 return;
-            if(diffx>0&&car->zCoordinate > -(3.5/2)+0.35)
-              car->zCoordinate-=0.03;
+            if(diffx>0&&car->xCoordinate > -(3.5/2))
+              car->xCoordinate-=0.03;
 
-            if(diffx<0&&car->zCoordinate < (3.5/2)-0.35)
-              car->zCoordinate+=0.03;
+            if(diffx<0&&car->xCoordinate < (3.5/2))
+              car->xCoordinate+=0.03;
+
+              printf("%d\n",car->xCoordinate);
         }
         lastx = x;
         lasty = y;

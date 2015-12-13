@@ -91,18 +91,126 @@ void Car::draw(){
   glPopMatrix();
 
 
-  //Cabout
-  glPushMatrix(); // The cubic body
-  glColor3f((92/255.0),(51/255.0),(23/255.0));
+  //First part of the Cabout
+  glPushMatrix();
   glTranslatef(this->xCoordinate-0.1,this->yCoordinate-0.05,this->zCoordinate-0.3);
-  glScalef(1.2,1,1);
-  glutSolidCube(0.2);
+  glScalef(0.2*1.2,0.2,0.2);
+  glEnable(GL_TEXTURE_2D);
+  glColor3f(1.0f,1.0f,1.0f);
+  glBindTexture(GL_TEXTURE_2D,carBodyTexture);
+  glBegin(GL_QUADS);
+  glNormal3f(0.0f,1.0f,0.0f); // Top
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f( -0.5f, 0.5f,0.5f);
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(0.5f, 0.5f,0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, 0.5f, -0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f( -0.5, 0.5f, -0.5f);
+
+  glNormal3f(1.0f,0.0f,0.0f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, -0.5f,0.5f); // Right
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(0.5f, -0.5f,-0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, 0.5f, -0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(0.5,  0.5f, 0.5f);
+
+  glNormal3f(-1.0f,0.0f,0.0f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(-0.5f, -0.5f,0.5f); // Left
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(-0.5f, -0.5f,-0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(-0.5f, 0.5f, -0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(-0.5,  0.5f, 0.5f);
+
+  glNormal3f(0.0f,0.0f,-1.0f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(-0.5f, -0.5f, -0.5f); // Back
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(0.5f, -0.5f,-0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, 0.5f, -0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(-0.5,  0.5f, -0.5f);
+
+  glNormal3f(0.0f,0.0f,1.0f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(-0.5f, -0.5f, 0.5f); // Front
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(0.5f, -0.5f,0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, 0.5f, 0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(-0.5,  0.5f, 0.5f);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
   glPopMatrix();
-  glPushMatrix(); // The cubic body
-  glColor3f((92/255.0),(51/255.0),(23/255.0));
+
+//Second Part of the Cabout
+  glPushMatrix();
   glTranslatef(this->xCoordinate+0.1,this->yCoordinate-0.05,this->zCoordinate-0.3);
-  glScalef(1.2,1,1);
-  glutSolidCube(0.2);
+  glScalef(0.2*1.2,0.2,0.2);
+  glEnable(GL_TEXTURE_2D);
+  glColor3f(1.0f,1.0f,1.0f);
+  glBindTexture(GL_TEXTURE_2D,carBodyTexture);
+  glBegin(GL_QUADS);
+  glNormal3f(0.0f,1.0f,0.0f); // Top
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f( -0.5f, 0.5f,0.5f);
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(0.5f, 0.5f,0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, 0.5f, -0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f( -0.5, 0.5f, -0.5f);
+
+  glNormal3f(1.0f,0.0f,0.0f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, -0.5f,0.5f); // Right
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(0.5f, -0.5f,-0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, 0.5f, -0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(0.5,  0.5f, 0.5f);
+
+  glNormal3f(-1.0f,0.0f,0.0f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(-0.5f, -0.5f,0.5f); // Left
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(-0.5f, -0.5f,-0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(-0.5f, 0.5f, -0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(-0.5,  0.5f, 0.5f);
+
+  glNormal3f(0.0f,0.0f,-1.0f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(-0.5f, -0.5f, -0.5f); // Back
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(0.5f, -0.5f,-0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, 0.5f, -0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(-0.5,  0.5f, -0.5f);
+
+  glNormal3f(0.0f,0.0f,1.0f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(-0.5f, -0.5f, 0.5f); // Front
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(0.5f, -0.5f,0.5f);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(0.5f, 0.5f, 0.5f);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(-0.5,  0.5f, 0.5f);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
   glPopMatrix();
 
   glPopMatrix();

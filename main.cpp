@@ -80,7 +80,7 @@ void drawBricks(){
 
 void checkCollisions(){
   for(int i=0;i<NUM_OF_BRICKS;i++){
-      if(fabs(bricks[i]->zCoordinate-car->zCoordinate)<=carSpeed){
+      if(fabs(bricks[i]->zCoordinate-car->zCoordinate)<=carSpeed-0.3){
         if(fabs(bricks[i]->xCoordinate-car->xCoordinate)<=0.6){
             gameOver = true;
         }

@@ -11,6 +11,7 @@
 #include "car.h"
 #include "road.h"
 #include "brick.h"
+#include "cone.h"
 
 using namespace std;
 void timer(int);
@@ -28,6 +29,7 @@ Car* car = new Car();
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
 Brick* bricks[NUM_OF_BRICKS];
+Cone* cone = new Cone(1,2);
 
 void initRoad(){
 
@@ -112,6 +114,7 @@ void render(void) {
         if(gameOver)
           car->update();
         car->draw();
+        cone->draw();
         drawAxes();
         drawSkymap();
         drawGrassWorld();

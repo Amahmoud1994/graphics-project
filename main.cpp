@@ -110,19 +110,22 @@ void render(void) {
         mouseRotation();
         drawRoad();
         drawBricks();
-        if(gameOver)
-          car->update();
-        car->draw();
         drawAxes();
         drawSkymap();
         drawGrassWorld();
+        if(gameOver)
+        {
+          car->update();
+          drawBitmapText("You Lost!! Good Luck Next Time",1,9,1);
+        }
+        car->draw();
         displayTime();
         glPopMatrix();
         glutSwapBuffers();
 }
 
 void timer(int t) {
-    if(!pause)
+    if(!pause && !gameOver)
         gameTimer+=0.05;
     if(int(gameTimer) % 40 ==0)
     {
@@ -146,6 +149,7 @@ void keyboardHandler(unsigned char key, int x, int y) {
 
 void displayTime()
 {
+
   drawBitmapText("Time :",1,11,1);
   int number=gameTimer;
   stringstream strs;

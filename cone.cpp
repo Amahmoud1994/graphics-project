@@ -18,20 +18,19 @@ void Cone::draw(){
   float radius=1;
   float r=1;
   float h=1;
-//  glEnable(GL_TEXTURE_2D);
-//  glBindTexture(GL_TEXTURE_2D, brickTexture);
+ glEnable(GL_TEXTURE_2D);
+ glBindTexture(GL_TEXTURE_2D, coneTexture);
   float t,s;
+  //The i controlles how many layers will we draw
+  // so it will take a lot of processing so we will increament the t & s by 1/2 i
   float i=0.05;
 
-  for(s=0.0;s<1.0;s+=i)
+  for(s=0.0;s<1.0;s+=(i/2))
   {
-      for(t=0.0;t<=1.0;t+=i)
+      for(t=0.0;t<=1.0;t+=(i/2))
       {
         glPushMatrix();
-      //  glScalef(3.5f,0.1f,15);
-        glEnable(GL_TEXTURE_2D);
         glColor3f(1.0f,1.0f,1.0f);
-        glBindTexture(GL_TEXTURE_2D,coneTexture);
           float r=((h-t)/h)*radius;
           glBegin(GL_POLYGON);
           glTexCoord2f(s,t);

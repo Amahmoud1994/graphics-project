@@ -75,7 +75,7 @@ void drawBricks(){
       bricks[i]->update();
       if(fabs(bricks[i]->zCoordinate-car->xCoordinate)<=1){
         if(fabs(bricks[i]->xCoordinate-car->zCoordinate)<=1){
-          
+
         }
       }
     }
@@ -99,13 +99,13 @@ void motion(int x, int y)
         }else{
             if(gameOver)
                 return;
-            if(diffx>0&&car->xCoordinate > -(3.5/2))
+            if(diffx<0&&car->xCoordinate > -1.500)
               car->xCoordinate-=0.03;
 
-            if(diffx<0&&car->xCoordinate < (3.5/2))
+            if(diffx>0&&car->xCoordinate < 1.500)
               car->xCoordinate+=0.03;
 
-              printf("%d\n",car->xCoordinate);
+              printf("%.3f\n",car->xCoordinate);
         }
         lastx = x;
         lasty = y;

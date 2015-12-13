@@ -5,26 +5,26 @@ void Car::draw(){
     return;
   }
   glPushMatrix();
-  glTranslatef(0.5f,0,1.5f);
+  glTranslatef(0.0f,0,1.5f);
   //glRotatef(-90,0,1,0);
   // Start wheels
   glPushMatrix();
-  glTranslatef(0.6f,-0.2f,0.1f);
+  glTranslatef(0.1f,-0.2f,-0.4f);
   drawWheel();
   glPopMatrix();
 
   glPushMatrix();
-  glTranslatef(0.3f,-0.2f,0.1f);
+  glTranslatef(-0.2f,-0.2f,-0.4f);
   drawWheel();
   glPopMatrix();
 
   glPushMatrix();
-  glTranslatef(0.3f,-0.2f,0.55f);
+  glTranslatef(-0.2f,-0.2f,0.05f);
   drawWheel();
   glPopMatrix();
 
   glPushMatrix();
-  glTranslatef(0.6f,-0.2f,0.55f);
+  glTranslatef(0.1f,-0.2f,0.05f);
   drawWheel();
   glPopMatrix();
   // End Wheels
@@ -32,7 +32,7 @@ void Car::draw(){
   //Body
   glPushMatrix(); // The cubic body
   glColor3f((92/255.0),(51/255.0),(23/255.0));
-  glTranslatef(this->xCoordinate+0.5,this->yCoordinate+0.05,this->zCoordinate+0.5);
+  glTranslatef(this->xCoordinate,this->yCoordinate+0.05,this->zCoordinate);
   glutSolidCube(0.44);
   glPopMatrix();
 
@@ -41,13 +41,13 @@ void Car::draw(){
 
   glPushMatrix(); // The cubic body
   glColor3f((92/255.0),(51/255.0),(23/255.0));
-  glTranslatef(this->xCoordinate+0.4,this->yCoordinate-0.05,this->zCoordinate+0.2);
+  glTranslatef(this->xCoordinate-0.1,this->yCoordinate-0.05,this->zCoordinate-0.3);
   glScalef(1.2,1,1);
   glutSolidCube(0.2);
   glPopMatrix();
   glPushMatrix(); // The cubic body
   glColor3f((92/255.0),(51/255.0),(23/255.0));
-  glTranslatef(this->xCoordinate+0.6,this->yCoordinate-0.05,this->zCoordinate+0.2);
+  glTranslatef(this->xCoordinate+0.1,this->yCoordinate-0.05,this->zCoordinate-0.3);
   glScalef(1.2,1,1);
   glutSolidCube(0.2);
   glPopMatrix();

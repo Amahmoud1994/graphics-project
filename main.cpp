@@ -162,6 +162,7 @@ void keyboardHandler(unsigned char key, int x, int y) {
       case 'r':  if(pause)break;gameOver = false;car->zCoordinate = 0;carSpeed = 0.5f;gameTimer=0;gameScore=4;break;
       case 'd':  if(car->xCoordinate < 1.5)car->xCoordinate+=0.03;break;
       case 'a':  if(car->xCoordinate > -1.5)car->xCoordinate-=0.03;break;
+      case 27 :  exit(0);
     }
 }
 

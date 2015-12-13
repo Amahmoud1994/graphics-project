@@ -73,14 +73,19 @@ void drawBricks(){
   for(int i=0;i<NUM_OF_BRICKS;i++){
     if(!pause){
       bricks[i]->update();
-      if(fabs(bricks[i]->zCoordinate-car->xCoordinate)<=1){
-        if(fabs(bricks[i]->xCoordinate-car->zCoordinate)<=1){
-
-        }
-      }
     }
     bricks[i]->draw();
   }
+}
+
+void checkCollisions(){
+  for(int i=0;i<NUM_OF_BRICKS;i++){
+      if(fabs(bricks[i]->zCoordinate-car->zCoordinate)<=carSpeed){
+        if(fabs(bricks[i]->xCoordinate-car->xCoordinate)<=0.6){
+            gameOver = true;
+        }
+      }
+    }
 }
 
 void mouseRotation(){
@@ -104,8 +109,6 @@ void motion(int x, int y)
 
             if(diffx>0&&car->xCoordinate < 1.500)
               car->xCoordinate+=0.03;
-
-              printf("%.3f\n",car->xCoordinate);
         }
         lastx = x;
         lasty = y;
@@ -125,9 +128,6 @@ void render(void) {
         mouseRotation();
         drawRoad();
         drawBricks();
-        if(!pause&&gameOver)
-          car->update();
-        car->draw();
         drawAxes();
         drawSkymap();
         drawGrassWorld();
@@ -140,7 +140,6 @@ void render(void) {
         displayTime();
         glPopMatrix();
         glPopMatrix();
-
         glutSwapBuffers();
 }
 
@@ -149,10 +148,10 @@ void timer(int t) {
         gameTimer+=0.05;
     if(int(gameTimer) % 40 ==0)
     {
-    speedAcceleration+=0.005;
-    carSpeed=speedAcceleration;
+      carSpeed+=0.005;
     }
     glutPostRedisplay();
+    checkCollisions();
     glutTimerFunc(FPS, timer, 0);
 }
 
@@ -160,7 +159,7 @@ void keyboardHandler(unsigned char key, int x, int y) {
     switch (key) {
       case 'p':  pause = !pause;break;
       case 'g':  gameOver = true;break;
-      case 'r':  gameOver = false;car->xCoordinate = 0;break;
+      case 'r':  if(pause)break;gameOver = false;car->zCoordinate = 0;carSpeed = 0.5f;gameTimer=0;gameScore=4;break;
     }
 }
 

@@ -56,7 +56,7 @@ void Car::draw(){
 }
 
 void Car::update(){
-  this->xCoordinate += carSpeed;
+  this->zCoordinate += carSpeed;
 }
 
 void Car::drawWheel(){

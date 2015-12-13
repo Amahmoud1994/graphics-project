@@ -6,7 +6,7 @@ void Car::draw(){
   }
   glPushMatrix();
   glTranslatef(0.5f,0,1.5f);
-  glRotatef(-90,0,1,0);
+  //glRotatef(-90,0,1,0);
   // Start wheels
   glPushMatrix();
   glTranslatef(0.6f,-0.2f,0.1f);
@@ -59,23 +59,23 @@ void Car::drawWheel(){
   glPushMatrix();
   glColor3f(0,0,0);
   glTranslatef(this->xCoordinate, this->yCoordinate, this->zCoordinate+0.1);
-  glRotatef(180, 1,0,0);
-  glRotatef(angle,0,0,1);
+//  glRotatef(180, 1,0,0);
+  glRotatef(angle,0,1,0);
   gluDisk(q, 0.0f, 0.1, 15, 1);
   glPopMatrix();
 
   glPushMatrix();
   glColor3f(0,0,0);
   glTranslatef(this->xCoordinate, this->yCoordinate, this->zCoordinate+0.1);
-  glRotatef(angle,0,0,1);
+  glRotatef(angle,0,1,0);
   gluCylinder(q,0.1,0.1,0.1,15,15);
   glPopMatrix();
 
   glPushMatrix();
   glColor3f(0,0,0);
-  glTranslatef(this->xCoordinate, this->yCoordinate, this->zCoordinate+0.2);
-  glRotatef(180, 1,0,0);
-  glRotatef(angle,0,0,1);
+  glTranslatef(this->xCoordinate, this->yCoordinate, this->zCoordinate+0.1);
+  //glRotatef(180, 1,0,0);
+  glRotatef(angle,0,1,0);
   gluDisk(q, 0.0f, 0.1, 15, 1);
   glPopMatrix();
 }

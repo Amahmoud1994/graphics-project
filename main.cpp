@@ -143,16 +143,14 @@ void timer(int t) {
 }
 
 void keyboardHandler(unsigned char key, int x, int y) {
-    if(key=='p')
-      pause = !pause;
-    if(key=='g')
-      gameOver = true;
-    if(key=='r'){
-      gameOver = false;
-      car->xCoordinate = 0;
+    switch (key) {
+      case 'p':  pause = !pause;break;
+      case 'g':  gameOver = true;break;
+      case 'r':  gameOver = false;car->xCoordinate = 0;break;
+      case 'z':  angleRot+=1;break;
+      case 'x':  angleRot-=1;break;
+
     }
-    if(key=='h')
-    angleRot+=1;
 }
 
 void displayTime()

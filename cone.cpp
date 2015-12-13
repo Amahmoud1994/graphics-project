@@ -1,18 +1,11 @@
 #include "cone.h"
 #include "math.h"
 #include "utils.h"
+
 void Cone::draw(){
   if(!this->visible) {
     return;
   }
-
-  // glPushMatrix();
-  // glColor3f(0.4,0,1);
-  // glTranslatef(this->xCoordinate,this->yCoordinate,this->zCoordinate);
-  // glRotatef(-90,1,0,0);
-  // glutSolidCone(0.2, 0.5, 10, 8);
-  // glPopMatrix();
-
   glPushMatrix();
   glScalef(0.2,1,0.2);
   float radius=1;
@@ -49,21 +42,6 @@ void Cone::draw(){
 
   glDisable(GL_TEXTURE_2D);
   glPopMatrix();
-
-// glEnable(GL_CULL_FACE);
-//   GLfloat gAngle = 0.0;
-//   GLUquadricObj *IDquadric;
-// IDquadric=gluNewQuadric();
-// gluQuadricNormals(IDquadric, GLU_SMOOTH);
-// gluQuadricTexture(IDquadric, GL_TRUE);
-//
-//   glBindTexture ( GL_TEXTURE_2D, brickTexture);
-//   glPushMatrix();
-//     glTranslatef(0,1,0);
-//     glRotatef(145,1.,0.,1.);
-//      glRotatef(90,0,1,0);
-//     gluCylinder(IDquadric,1.0f,0.0f,1.0f,10,10);
-//   glPopMatrix();
 }
 
 void Cone::update(){

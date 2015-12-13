@@ -62,7 +62,7 @@ for(int i=0;i<NUM_OF_ROADS;i++){
   }
   if(roads[farestRoad]->zCoordinate>=(NUM_OF_ROADS/2.0)*15){
     int nextIndex = (farestRoad+NUM_OF_ROADS-1)%NUM_OF_ROADS;
-    roads[farestRoad]->zCoordinate = roads[nextIndex]->zCoordinate-14.7;
+    roads[farestRoad]->zCoordinate = roads[nextIndex]->zCoordinate-15;
     farestRoad = (farestRoad+1)%NUM_OF_ROADS;
     if(farestRoad<0)
       farestRoad = NUM_OF_ROADS-1;
@@ -71,8 +71,14 @@ for(int i=0;i<NUM_OF_ROADS;i++){
 
 void drawBricks(){
   for(int i=0;i<NUM_OF_BRICKS;i++){
-    if(!pause)
+    if(!pause){
       bricks[i]->update();
+      if(fabs(bricks[i]->zCoordinate-car->xCoordinate)<=1){
+        if(fabs(bricks[i]->xCoordinate-car->zCoordinate)<=1){
+          
+        }
+      }
+    }
     bricks[i]->draw();
   }
 }
@@ -119,6 +125,9 @@ void render(void) {
         mouseRotation();
         drawRoad();
         drawBricks();
+        if(!pause&&gameOver)
+          car->update();
+        car->draw();
         drawAxes();
         drawSkymap();
         drawGrassWorld();

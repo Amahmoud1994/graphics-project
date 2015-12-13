@@ -24,6 +24,7 @@ GLuint grassTexture;
 GLuint brickTexture;
 GLuint coneTexture;
 GLuint carBodyTexture;
+GLuint tireTexture;
 
 GLuint skybox;
 
@@ -102,6 +103,12 @@ void loadTextures() {
 
         grassTexture = SOIL_load_OGL_texture (
                 "textures/grass.jpg",
+                SOIL_LOAD_AUTO,
+                SOIL_CREATE_NEW_ID,
+                SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+                );
+        tireTexture = SOIL_load_OGL_texture (
+                "textures/tires.jpg",
                 SOIL_LOAD_AUTO,
                 SOIL_CREATE_NEW_ID,
                 SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT

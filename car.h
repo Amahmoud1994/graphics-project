@@ -24,5 +24,6 @@ public:
 
   virtual void draw();
   virtual void update();
+  
 };
 #endif

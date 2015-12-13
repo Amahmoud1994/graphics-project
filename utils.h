@@ -52,6 +52,8 @@ extern GLuint grassTexture;
 extern GLuint coneTexture;
 extern GLuint brickTexture;
 extern GLuint carBodyTexture;
+extern GLuint tireTexture;
+
 
 extern GLuint skybox;
 

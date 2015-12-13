@@ -135,6 +135,8 @@ void render(void) {
         {
           car->update();
           drawBitmapText("You Lost!! Good Luck Next Time",1,9,1);
+          drawBitmapText("Press r to restart",1,8.5,1);
+
         }
         car->draw();
         displayTime();

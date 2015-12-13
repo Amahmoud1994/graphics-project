@@ -14,6 +14,7 @@ void Cone::draw(){
   // glPopMatrix();
 
   glPushMatrix();
+  glScalef(0.2,1,0.2);
   float radius=1;
   float r=1;
   float h=1;
@@ -30,7 +31,7 @@ void Cone::draw(){
       //  glScalef(3.5f,0.1f,15);
         glEnable(GL_TEXTURE_2D);
         glColor3f(1.0f,1.0f,1.0f);
-        glBindTexture(GL_TEXTURE_2D,brickTexture);
+        glBindTexture(GL_TEXTURE_2D,coneTexture);
           float r=((h-t)/h)*radius;
           glBegin(GL_POLYGON);
           glTexCoord2f(s,t);

@@ -48,6 +48,7 @@ extern float carSpeed;
 extern bool gameOver,pause;
 extern GLuint asphaltTexture;
 extern GLuint grassTexture;
+extern GLuint coneTexture;
 extern GLuint brickTexture;
 
 extern GLuint skybox;

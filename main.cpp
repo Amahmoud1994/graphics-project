@@ -11,6 +11,7 @@
 #include "car.h"
 #include "road.h"
 #include "brick.h"
+#include "cone.h"
 
 using namespace std;
 void timer(int);
@@ -25,10 +26,11 @@ void drawGrassWorld();
 void drawSkymap();
 
 Car* car = new Car();
-
+float angleRot=0.0;
 int farestRoad = 0;
 Road* roads[NUM_OF_ROADS];
 Brick* bricks[NUM_OF_BRICKS];
+Cone* cones[NUM_OF_BRICKS];
 
 void initRoad(){
 
@@ -107,9 +109,14 @@ void mouse(int b, int s, int x, int y) {
 void render(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
+        glRotatef(angleRot,0,1,0);
+        glPushMatrix();
         mouseRotation();
         drawRoad();
         drawBricks();
+        if(gameOver)
+          car->update();
+        car->draw();
         drawAxes();
         drawSkymap();
         drawGrassWorld();
@@ -121,6 +128,8 @@ void render(void) {
         car->draw();
         displayTime();
         glPopMatrix();
+        glPopMatrix();
+
         glutSwapBuffers();
 }
 
@@ -145,6 +154,8 @@ void keyboardHandler(unsigned char key, int x, int y) {
       gameOver = false;
       car->xCoordinate = 0;
     }
+    if(key=='h')
+    angleRot+=1;
 }
 
 void displayTime()

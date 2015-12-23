@@ -7,7 +7,8 @@ void Cone::draw(){
     return;
   }
   glPushMatrix();
-  glScalef(0.2,1,0.2);
+  glTranslatef(this->xCoordinate-0.5,0.25,this->zCoordinate);
+  glScalef(0.1,0.5,0.1);
   float radius=1;
   float r=1;
   float h=1;
@@ -47,5 +48,7 @@ void Cone::draw(){
 }
 
 void Cone::update(){
-  xCoordinate += CAMERA_SPEED;
+  zCoordinate += carSpeed;
+  if(zCoordinate>40)
+    zCoordinate = this->initialZCoordinate;
 }

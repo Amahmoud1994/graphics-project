@@ -128,7 +128,6 @@ void render(void) {
         mouseRotation();
         drawRoad();
         drawBricks();
-        drawAxes();
         drawSkymap();
         drawGrassWorld();
         if(gameOver)
